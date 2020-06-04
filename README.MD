@@ -7,4 +7,4 @@ make it work on all documents.
 
 
 # goal #3
-make it work on a website.
+make it work on a url.

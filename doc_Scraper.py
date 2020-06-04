@@ -6,7 +6,7 @@ from PyPDF2 import PdfFileReader
 phoneRegex = re.compile(r'''
 # 415-555-0000, 555-0000, (415) 555-0000, 555-0000 ext 12345, ext. 12345, x12345
 (
-((\d\d\d)|(\(\d\d\d\)))?       # area code (optional)
+((\d\d\d)|(\(\d\d\d\)))?        # area code (optional)
 (\s|-)                          # first seperator
 \d\d\d                          # first 3 digits
 -                               # separator
@@ -26,24 +26,29 @@ emailRegex = re.compile(r'''
 ''', re.VERBOSE)
 
 
-def text_extractor(path):
-
+def phone_extractor(path):
     with open(path, 'rb') as f:
         pdf = PdfFileReader(f)
         # get the first page
-        page = pdf.getPage(1)
-        print(page)
-        print('Page type: {}'.format(str(type(page))))
-        
-        return page.extractText()
+        content=""
+        content += pdf.getPage(1).extractText()
+        phone = content.replace('\n', ' ').replace(' ', '')
+        return phone
 
+def text_extractor(path):
+    with open(path, 'rb') as f:
+        pdf = PdfFileReader(f)
+        # get the first page
+        content=""
+        content += pdf.getPage(1).extractText()
+        return content
 
+phone = phone_extractor('./pdf_test.pdf')
 text = text_extractor('./pdf_test.pdf')
-
 # get the text off the clipboard
 
 # Extract the email/phone from this text
-extractedPhone = phoneRegex.findall(text)
+extractedPhone = phoneRegex.findall(phone)
 extractedEmail = emailRegex.findall(text)
 
 # taking the first index of (extracted phone which has whole phone number)
