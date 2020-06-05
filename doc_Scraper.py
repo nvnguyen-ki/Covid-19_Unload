@@ -1,4 +1,4 @@
-import re, pyperclip, PyPDF2 
+import re, pyperclip, PyPDF2, magic
 from PyPDF2 import PdfFileReader
 
 # create a regex for phone numbers
@@ -12,12 +12,11 @@ phoneRegex = re.compile(r'''
 -                               # separator
 \d\d\d\d                        # last 4 digits
 (((ext(\.)?\s)|x)               # extension (optional)
-(\d{2,5}))?                       # extension number-part (optional)
+(\d{2,5}))?                     # extension number-part (optional)
 )
 ''', re.VERBOSE)
 
-
-#TODO : create a regex for email addresses
+#: create a regex for email addresses
 emailRegex = re.compile(r'''
 # some.+_thing@something.com
 [a-zA-Z0-9.+]+ # name part
@@ -25,23 +24,29 @@ emailRegex = re.compile(r'''
 [a-zA-Z0-9.+]+ # domain name part
 ''', re.VERBOSE)
 
-
+# function to extract phone numbers
 def phone_extractor(path):
     with open(path, 'rb') as f:
         pdf = PdfFileReader(f)
-        # get the first page
-        content=""
-        content += pdf.getPage(1).extractText()
-        phone = content.replace('\n', ' ').replace(' ', '')
+        # get all pages
+        pages = (pdf.getNumPages())
+        content = ""
+        for i in range(pages):
+            content += pdf.getPage(i).extractText()
+            phone = content.replace('\n', ' ').replace(' ', '')
         return phone
+# function to extract text
 
 def text_extractor(path):
     with open(path, 'rb') as f:
         pdf = PdfFileReader(f)
-        # get the first page
-        content=""
-        content += pdf.getPage(1).extractText()
-        return content
+        # get all pages
+        pages = (pdf.getNumPages())
+        content = ""
+        for i in range(pages):
+            content += pdf.getPage(i).extractText()
+    return content
+
 
 phone = phone_extractor('./pdf_test.pdf')
 text = text_extractor('./pdf_test.pdf')
