@@ -1,4 +1,4 @@
-## [https://nguyensqrd.com](https://nguyensqrd.com)
+## Scraper
 a website to scrape information using apis.
 
 ## Motivation
