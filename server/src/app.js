@@ -1,0 +1,16 @@
+console.log('starting #1')
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const morgan = require('morgan')
+
+const app = express()
+app.use(morgan('combine'))
+app.use(bodyParser.json())
+app.use(cors())
+app.get('/status', (req,res) => {
+    res.send({
+        message: 'starting #2'
+    })
+})
+app.listen(process.env.port || 8081)
