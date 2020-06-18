@@ -1,13 +1,15 @@
 <template>
   <div class="page">
     <div class="register">
-      <h3> Register </h3>
+      <h3 style="border-bottom:1px solid rgb(146, 146, 146)"> Register </h3>
+      <div id="Infobox">
       <input type="text" v-model="email" name="email" placeholder="email"/>
       <br>
       <input type="password" name="password" v-model="password" placeholder="password"/>
       <br>
+      </div>
       <div class="error" v-html="error" />
-      <button @click=register>register</button>
+      <button style="border:1px solid rgb(146, 146, 146); margin-top:20px" @click=register>register</button>
     </div>
   </div>
 </template>
@@ -38,6 +40,10 @@ export default {
 </script>
 
 <style scoped>
+#Infobox {
+  margin-top:20px;
+}
+
 .register {
   width: 50%;
   margin:auto;
