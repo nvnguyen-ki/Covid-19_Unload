@@ -4,15 +4,12 @@ const Sequelize = require('sequelize')
 const config = require('../config/config.js')
 const db = {}
 
-var datab = config.db.database
-var user = config.db.user
-var password = config.db.password
-//var option = config.db.option
-var dialect = config.db.options.dialect
-const sequelize = new Sequelize( datab, user, password,
+
+const sequelize = new Sequelize( config.db.database, config.db.user, config.db.password,
     {
-        host: 'localhost',
-        dialect: dialect
+        host: config.db.options.host,
+        port: config.port,
+        dialect: config.db.options.dialect
     }
 )
 
