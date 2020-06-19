@@ -9,7 +9,7 @@
       <br>
       </div>
       <div class="error" v-html="error" />
-      <button style="border:1px solid rgb(146, 146, 146); margin-top:20px" @click=register>register</button>
+      <v-btn text small style="margin: 15px;font-size:12px; border:1px solid rgb(146, 146, 146)" @click=register>sign-up</v-btn>
     </div>
   </div>
 </template>
@@ -49,7 +49,6 @@ export default {
   margin:auto;
   border:1px solid rgb(146, 146, 146);
   text-align: center;
-  font-family: 'Inconsolata',monospace;
 }
 
 .error {
