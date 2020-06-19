@@ -1,7 +1,7 @@
 <template>
   <div class="page" >
-    <div class="register" >
-      <h3 style="border-bottom:1px solid rgb(146, 146, 146)"> Register </h3>
+    <div class="login" >
+      <h3 style="border-bottom:1px solid rgb(146, 146, 146)"> Login </h3>
       <div id="Infobox">
       <input type="text" v-model="email" name="email" placeholder="email"/>
       <br>
@@ -9,7 +9,7 @@
       <br>
       </div>
       <div class="error" v-html="error" />
-      <v-btn text small style="margin: 15px;font-size:12px; border:1px solid rgb(146, 146, 146)" @click=register>sign-up</v-btn>
+      <v-btn text small style="margin: 15px;font-size:12px; border:1px solid rgb(146, 146, 146)" @click=login>login</v-btn>
     </div>
   </div>
 </template>
@@ -25,9 +25,9 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async login () {
       try {
-        await AuthenticationService.register({
+        await AuthenticationService.login({
           email: this.email,
           password: this.password
         })
@@ -44,7 +44,7 @@ export default {
   margin-top:20px;
 }
 
-.register {
+.login {
   width: 50%;
   margin:auto;
   border:1px solid rgb(146, 146, 146);
