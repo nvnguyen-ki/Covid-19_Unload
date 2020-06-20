@@ -46,6 +46,10 @@ export default {
   margin-top:20px;
 }
 
+.page{
+  margin-top:20px;
+}
+
 .login {
   width: 50%;
   margin:auto;

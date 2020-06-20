@@ -1,6 +1,6 @@
 <template>
   <div class="Home">
-    home page
+    <h3> this is where you can scrape stuff </h3>
   </div>
 </template>
 
@@ -10,3 +10,7 @@ export default {
   name: 'Home'
 }
 </script>
+
+<style scoped>
+
+</style>
