@@ -5,8 +5,8 @@
     <a class="navbar-brand" href="/">
       Scrape
     </a>
-    <router-link to="login">Login</router-link>
-    <router-link to="register">Sign Up</router-link>
+    <router-link to="login" v-if="!$store.state.isUserLoggedIn">Login</router-link>
+    <router-link to="register" v-if="!$store.state.isUserLoggedIn">Sign Up</router-link>
   </nav>
 </div>
 </template>

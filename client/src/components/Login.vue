@@ -9,7 +9,7 @@
       <br>
       </div>
       <div class="error" v-html="error" />
-      <v-btn text small style="margin: 15px;font-size:12px; border:1px solid rgb(146, 146, 146)" @click=login>login</v-btn>
+      <v-btn text small style="margin: 15px;font-size:12px; border:1px solid rgb(146, 146, 146)" @click="login">login</v-btn>
     </div>
   </div>
 </template>
