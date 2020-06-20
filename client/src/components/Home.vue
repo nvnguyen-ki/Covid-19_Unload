@@ -1,6 +1,6 @@
 <template>
   <div class="Home">
-    <h3> this is where you can scrape stuff </h3>
+    this is where you can scrape stuff
   </div>
 </template>
 
@@ -12,5 +12,9 @@ export default {
 </script>
 
 <style scoped>
-
+.Home {
+  border:1px solid black;
+  width:100%;
+  margin:auto;
+}
 </style>

@@ -10,6 +10,7 @@
       </div>
       <div class="error" v-html="error" />
       <v-btn text small style="margin: 15px;font-size:12px; border:1px solid rgb(146, 146, 146)" @click="register">sign-up</v-btn>
+      <p id="congrats"></p>
     </div>
   </div>
 </template>
@@ -33,8 +34,13 @@ export default {
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.$store.dispatch('setToken', null)
+        this.$store.dispatch('setUser', null)
+        document.getElementById('congrats').innerHTML = 'congratulations! you have made an account.'
+        this.error = ''
       } catch (error) {
         this.error = error.response.data.error
+        document.getElementById('congrats').innerHTML = ''
       }
     }
   }
@@ -59,5 +65,9 @@ export default {
 
 .error {
   color:rgb(235, 132, 107);
+}
+
+#congrats {
+  color: royalblue;
 }
 </style>
