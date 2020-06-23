@@ -1,7 +1,7 @@
 <template>
 <div>
     <!-- Image and text -->
-  <nav class="navbar navbar-light bg-light sticky-top">
+  <nav class="_nav navbar navbar-light bg-light">
     <a class="navbar-brand" href="/">
       Scrape
     </a>
@@ -12,7 +12,7 @@
       <router-link to="register" v-if="!$store.state.isUserLoggedIn">Sign Up</router-link>
     </div>
     <div class="nav-item">
-      <a @click="logout" href="/" v-if="$store.state.isUserLoggedIn">Log-Out</a>
+      <a @click="logout" href="" v-if="$store.state.isUserLoggedIn">Log-Out</a>
     </div>
   </nav>
 </div>
@@ -25,7 +25,7 @@ export default {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
       this.$router.push({
-        name: '/Home'
+        path: '/Home'
       })
     }
   },
@@ -34,6 +34,7 @@ export default {
 </script>
 
 <style scoped>
+
 .nav-item{
   margin-right:5px;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="Home">
-    this is where you can scrape stuff
+    test
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
 <style scoped>
 .Home {
   border:1px solid black;
-  width:100%;
+  width:auto;
   margin:auto;
 }
 </style>
