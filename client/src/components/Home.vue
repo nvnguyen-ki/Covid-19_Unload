@@ -7,7 +7,7 @@
       <br>
        <!-- <input type="text" name="scrape" placeholder="Email, phone, etc..."/> -->
       </div>
-      <v-btn text small style="margin: 15px;font-size:12px; border:1px solid rgb(146, 146, 146)" onClick="scrapeRealtor()">Scrape</v-btn>
+      <v-btn text small style="margin: 15px;font-size:12px; border:1px solid rgb(146, 146, 146)">Scrape</v-btn>
       <p id="congrats"></p>
     </div>
   </div>
