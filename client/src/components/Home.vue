@@ -25,9 +25,11 @@ export default {
   methods: {
     async scrape () {
       try {
-        await AuthenticationService.scrape(({
+        const datat = await AuthenticationService.scrape(({
           url: this.url
         }))
+        document.getElementById('congrats').innerHTML = datat.data[0].title + ' Has a ' + datat.data[0].rating + ' rating.'
+        console.log(datat.data[0])
       } catch (error) {
         this.error = error.response.data.error
       }
