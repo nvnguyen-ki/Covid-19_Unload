@@ -1,7 +1,6 @@
 const AuthenticationController = require('./controllers/AuthenticationController')
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const getUrls = require('get-urls')
-const fetch = require('node-fetch')
 const request = require('request-promise')
 const cheerio = require('cheerio')
 module.exports = (app) => {
@@ -10,25 +9,22 @@ module.exports = (app) => {
     AuthenticationController.register)
 
     app.post('/login', 
-    AuthenticationController.login)
-
-
-    app.post('/scrape2', 
-    function(req, res) {
-        const body = req.body.text
-        const urls = Array.from(getUrls(body))
-        res.send(urls)
-    });
-        
+    AuthenticationController.login)    
    
-
     app.post('/scrape', 
     function(req, res) {
         try {
-            const url = [req.body.url];
+            const body = req.body
+            const text = body.text
+            const urls = Array.from(getUrls(text));
+            if (!body || text === "" || urls.length == 0) { //no text provided.
+                return res.send({
+                    error: "please provide valid urls"
+                })
+            } else {
             (async function () {
                 let imdbData = []
-                for (let movie of url) {
+                for (let movie of urls) {
                 const response = await request({
                 uri: movie,
                 json: true,
@@ -47,22 +43,18 @@ module.exports = (app) => {
                 })
             }
                 res.send(imdbData)
+                console.log(imdbData)
                 return {
                     title: imdbData.title,
                     rating: imdbData.rating
                 }
             }
             )()
-            
-            if (!url) { //User input is blank.
-                return res.send({
-                    error: "please provide an address"
-                })
-            }
         }
+    }
         catch (err) {
             res.status(500).send({
-            error: 'An error has occured trying'
+            error: 'An error has occured trying to parse'
         })
     }
       });

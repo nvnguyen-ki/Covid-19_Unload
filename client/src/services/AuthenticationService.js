@@ -7,7 +7,7 @@ export default {
   login (credentials) {
     return Api().post('login', credentials)
   },
-  scrape (url) {
-    return Api().post('scrape', url)
+  scrape (Text) {
+    return Api().post('scrape', Text)
   }
 }
