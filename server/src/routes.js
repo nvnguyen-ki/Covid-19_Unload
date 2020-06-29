@@ -1,42 +1,54 @@
-const AuthenticationController = require('./controllers/AuthenticationController')
-const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
+
 const functions = require('./functions')
 //const getUrls = require('get-urls')
 const request = require('request-promise')
 const cheerio = require('cheerio')
-module.exports = (app) => {
-    app.post('/register', 
-    AuthenticationControllerPolicy.register,
-    AuthenticationController.register)
 
-    app.post('/login', 
-    AuthenticationController.login)    
-
-
-    // scraping all upcoming movies
-    app.post('/scrape2', 
-    function(req, res) { 
-        const body = req.body;
-        (async function () {
-            // response to get uri
-        const response = await request({
-            uri: body.text,
-            json: true
-        })
-        // loading response
-        let $ = cheerio.load(response)
-        const length = $('div[id="main"] > ul > li > a').length
-        const movies = $('div[id="main"] > ul > li > a')
-        console.log(movies[0].attribs.href)
-        let titles = []
-        for (var i = 0; i < length; i++) {
-            titles.push("https://www.imdb.com/" + movies[i].attribs.href)
-        }
-        res.send(titles)
-        
+var options = {
+    method: 'GET',
+    url: 'https://covid-19-data.p.rapidapi.com/report/country/name',
+    qs: {
+        'date-format': 'YYYY-MM-DD',
+        format: 'json',
+        date: '2020-04-01',
+        name: ''
+      },
+    headers: {
+      'x-rapidapi-host': 'covid-19-data.p.rapidapi.com',
+      'x-rapidapi-key': 'ed695d1127mshcb85b847f3a808fp131680jsn702c0339b102',
+      useQueryString: true
     }
-        )()
-    })   
+  };
+  
+module.exports = (app) => {
+    // request from covid api depending on country
+    app.post('/test', 
+    async function(req, res) { 
+        // request for a country
+        options.qs.name = req.body.text
+        if (req.body.text == "") {
+            return res.send({
+                error: "please provide valid country"
+            })
+        }
+        request(options, function (error, response, body) {
+            if (error) throw new Error(error);
+            // parsing body cause it's a string instead in json format
+            var jsonbody = JSON.parse(body);
+            let data = []
+            var confirmed = jsonbody[0].provinces[0].confirmed
+            var recovered = jsonbody[0].provinces[0].recovered
+            var deaths = jsonbody[0].provinces[0].deaths
+            var active = jsonbody[0].provinces[0].active
+            // pushing the parsed info into an array
+            data.push({
+                confirmed, recovered, deaths, active
+            })
+            console.log(data);
+            res.send(data)
+        })
+    })
+    
     // scraping title and ratings of all movies within an array.
     app.post('/scrape', 
     async function(req, res) {

@@ -31,8 +31,9 @@ export default {
         const res = await AuthenticationService.scrape(({
           text: this.text
         }))
-        document.getElementById('congrats').innerHTML = res.data[0].title + ' Has a ' + res.data[0].rating + ' rating.'
-        console.log(res.data[0])
+        for (var i = 0; i < res.data.length; i++) {
+          document.getElementById('congrats').innerHTML = res.data[i].title + ' Has a ' + res.data[i].rating + ' rating.'
+        }
       } catch (error) {
         this.error = error.response.data.error
       }

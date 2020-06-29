@@ -17,9 +17,10 @@ module.exports = {
     for (var i = 0; i < length; i++) {
         titles.push("https://www.imdb.com/" + movies[i].attribs.href)
     }
-    console.log("in funct: " + titles.length)
+    console.log("length: " + titles.length)
     return titles
 }
+  
    
     
 
