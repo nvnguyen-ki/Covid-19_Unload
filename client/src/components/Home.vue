@@ -1,11 +1,7 @@
 
 <template>
   <div class="page" style="margin-top:20px;">
-    <div class="scrape_box" >
-      <div class="worldData">
-        <p id="Worldslate" > {{TotalWorld}} --- {{TotalDeath}}</p>
-        <p id="USAslate" > {{UsaTotal}} --- {{UsaDeath}}</p>
-      </div>
+    <div class="box" >
       <div id="Infobox">
       <!-- <input type="text" v-model="text" name="text" placeholder="url"/> -->
       <input type="text" v-model="regionProvince" name="regionProvince" placeholder="State"/>
@@ -23,13 +19,6 @@
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 export default {
-  /* created is a function that runs before the application is loaded.
-  and you're calling the function WorldData so it loads the data first */
-  created () {
-    console.log('getting data...')
-    this.UsaData()
-    this.WorldData()
-  },
   data () {
     return {
       CityName: '',
@@ -43,18 +32,6 @@ export default {
     }
   },
   methods: {
-    // World Data of Covid
-    async UsaData () {
-      const res = await AuthenticationService.USAData()
-      this.UsaTotal = 'USA: ' + res.data[0].usaConfirmed
-      this.UsaDeath = 'USA Deaths ' + res.data[0].usaDeaths
-    },
-    async WorldData () {
-      const res = await AuthenticationService.WorldData()
-      this.TotalWorld = 'Global: ' + res.data[0].total_in_world
-      this.TotalDeath = 'Global Deaths ' + res.data[0].total_death_in_world
-    },
-    // searching covid updates based on state and city in USA.
     async searchData () {
       const res = await AuthenticationService.searchData(({
         // getting data from input
@@ -87,7 +64,7 @@ export default {
 </script>
 
 <style scoped>
-.scrape_box {
+.box {
   width:50;
   text-align: center;
   margin:auto;

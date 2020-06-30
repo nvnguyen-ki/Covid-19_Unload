@@ -47,8 +47,9 @@ Based on public data by Johns Hopkins CSSE */
     }
   };
 module.exports = (app) => {
-    app.post('/USAData', (req,res) => {
+    app.post('/WorldData', (req,res) => {
         let USAData = []
+        // request for usa data
             request(USATotal, function (error, response, body) {
                 if (error) throw new Error(error);
                 const UsaTotal = (JSON.parse(body));
@@ -59,12 +60,7 @@ module.exports = (app) => {
                     usaConfirmed, usaDeaths
                 })
                 console.log(USAData)
-                res.send(USAData)
             });
-    })
-
-
-    app.post('/WorldData', (req,res) => {
         var today = new Date();
         var dd = String(today.getDate()-1).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -73,13 +69,16 @@ module.exports = (app) => {
         console.log(today)
         totalData.qs.date = today
         let worldDatas = []
+        // request for total data
             request(totalData, function (error, response, body) {
                 if (error) throw new Error(error);
                 const worldData = (JSON.parse(body));
                 const total_in_world = worldData.data.confirmed
                 const total_death_in_world = worldData.data.deaths
+                const usaConfirmed = USAData[0].usaConfirmed
+                const usaDeaths = USAData[0].usaDeaths
                 worldDatas.push({
-                    total_in_world,total_death_in_world
+                    total_in_world,total_death_in_world, usaConfirmed, usaDeaths
                 })
                 console.log(worldDatas)
                 res.send(worldDatas)

@@ -8,11 +8,7 @@ export default {
   searchData (region_province, city_name) {
     return Api().post('searchData', region_province, city_name)
   },
-
   WorldData () {
     return Api().post('WorldData')
-  },
-  USAData () {
-    return Api().post('USAData')
   }
 }
