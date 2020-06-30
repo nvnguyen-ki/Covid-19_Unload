@@ -1,8 +1,10 @@
 
 <template>
-  <div class="page" style="margin-top:20px;" >
+  <div class="page" style="margin-top:20px;">
     <div class="scrape_box" >
-      <form method="POST" action="/scrape">
+      <div class="worldData">
+        <p id="Worldslate" > {{TotalWorld}} --- {{TotalDeath}}</p>
+      </div>
       <div id="Infobox">
       <!-- <input type="text" v-model="text" name="text" placeholder="url"/> -->
       <input type="text" v-model="regionProvince" name="regionProvince" placeholder="State"/>
@@ -11,8 +13,7 @@
        <!-- <input type="text" name="scrape" placeholder="Email, phone, etc..."/> -->
       </div>
        <div id="error" v-html="error" />
-      <v-btn text small style="margin: 15px;font-size:12px; border:1px solid rgb(146, 146, 146)" @click="test">test</v-btn>
-      </form>
+      <v-btn text small style="margin: 15px;font-size:12px; border:1px solid rgb(146, 146, 146)" @click="searchData">test</v-btn>
       <p id="congrats"></p>
     </div>
   </div>
@@ -21,23 +22,41 @@
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 export default {
+  /* created is a function that runs before the application is loaded.
+  and you're calling the function WorldData so it loads the data first */
+  created () {
+    console.log('loading...')
+    this.WorldData()
+  },
   data () {
     return {
       CityName: '',
       regionProvince: '',
       text: '',
-      error: null
+      error: null,
+      TotalWorld: '',
+      TotalDeath: ''
     }
   },
   methods: {
-    async test () {
-      const res = await AuthenticationService.test(({
+    // World Data of Covid
+    async WorldData () {
+      const res = await AuthenticationService.WorldData()
+      const TotalWorld = res.data[0].total_in_world
+      const TotalDeath = res.data[0].total_death_in_world
+      this.TotalWorld = 'Global: ' + TotalWorld
+      this.TotalDeath = 'Global Deaths ' + TotalDeath
+    },
+    // searching covid updates based on state and city in USA.
+    async searchData () {
+      const res = await AuthenticationService.searchData(({
+        // getting data from input
         region_province: this.regionProvince,
         city_name: this.CityName
       }))
       try {
         console.log(res.data)
-        document.getElementById('congrats').innerHTML = 'confirmed cases: ' + res.data[0].confirmed + ' and the deaths today: ' + res.data[0].death + '.'
+        document.getElementById('congrats').innerHTML = 'confirmed cases: ' + res.data[0].today_confirmed_in_city + ' and the deaths today: ' + res.data[0].death_in_city + '.'
         document.getElementById('error').innerHTML = ''
       } catch (error) {
         this.error = res.data.error

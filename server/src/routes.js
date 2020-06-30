@@ -1,24 +1,15 @@
 
 const functions = require('./functions')
 //const getUrls = require('get-urls')
+
+/* request apis */
 const request = require('request-promise')
 const cheerio = require('cheerio');
 
-// var countryDailyReport = {
-//     method: 'GET',
-//     url: 'https://covid-19-data.p.rapidapi.com/report/country/all',
-//     qs: {'date-format': 'YYYY-MM-DD', format: 'json', date: '2020-04-01'},
-//     headers: {
-//       'x-rapidapi-host': 'covid-19-data.p.rapidapi.com',
-//       'x-rapidapi-key': 'ed695d1127mshcb85b847f3a808fp131680jsn702c0339b102',
-//       useQueryString: true
-//     }
-//   };
+/* COVID-19 Statistics API Documentation
+Based on public data by Johns Hopkins CSSE */
 
-/** COVID-19 Statistics API Documentation
-Based on public data by Johns Hopkins CSSE **/
-
-  var USAData = {
+  var dailyUSAData = {
     method: 'GET',
     url: 'https://covid-19-statistics.p.rapidapi.com/reports',
     qs: {
@@ -33,32 +24,83 @@ Based on public data by Johns Hopkins CSSE **/
       useQueryString: true
     }
   };
-  
+
+  var totalData = {
+    method: 'GET',
+    url: 'https://covid-19-statistics.p.rapidapi.com/reports/total',
+    qs: {date: '2020-04-07'},
+    headers: {
+      'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com',
+      'x-rapidapi-key': 'ed695d1127mshcb85b847f3a808fp131680jsn702c0339b102',
+      useQueryString: true
+    }
+  };
+/*          let worldDatas = []
+            request(totalData, function (error, response, body) {
+                if (error) throw new Error(error);
+                const worldData = (JSON.parse(body));
+                const total_in_world = worldData.data.confirmed
+                const total_death_in_world = worldData.data.deaths
+                worldDatas.push({
+                    total_in_world,total_death_in_world
+                })
+            });
+*/
 module.exports = (app) => {
+
+    app.post('/WorldData', (req,res) => {
+        let worldDatas = []
+            request(totalData, function (error, response, body) {
+                if (error) throw new Error(error);
+                const worldData = (JSON.parse(body));
+                const total_in_world = worldData.data.confirmed
+                const total_death_in_world = worldData.data.deaths
+                worldDatas.push({
+                    total_in_world,total_death_in_world
+                })
+                console.log(worldDatas)
+                res.send(worldDatas)
+            });
+    })
+    
     // request from covid api depending on country
-    app.post('/test', 
+    app.post('/searchData', 
     async function(req, res) { 
         try {// request for daily usa data
-            console.log(req.body.region_province)
-            console.log(req.body.city_name)
-            USAData.qs.region_province = req.body.region_province
-            USAData.qs.city_name = req.body.city_name
-            await request(USAData, function (error, response, body) {
+            const region =  req.body.region_province
+            const city = req.body.city_name
+            if (region == "" || city == "") {
+                return res.send({
+                    error: 'Incorrect state or city'
+            })
+        }
+            dailyUSAData.qs.region_province = region
+            dailyUSAData.qs.city_name = city
+            
+            await request(dailyUSAData, function (error, response, body) {
+                
                 if (error) throw new Error(error);
                 let jsonbody = JSON.parse(body)
-                if (jsonbody.data.length == 0 ) {
+                if (jsonbody.data.length == 0) {
                     return res.send({
-                        error: 'Incorrect region or city'
+                        error: 'Incorrect state or city'
                     })
                 } else {
                     let data = []
-                    const confirmed = jsonbody.data[0].region.cities[0].confirmed
-                    const death = jsonbody.data[0].region.cities[0].deaths
-                    const last_update = jsonbody.data[0].region.cities[0].last_update
-                    data.push({
-                        confirmed, death, last_update
-                    })
-                    console.log(data)
+                    for (let i = 0; i < jsonbody.data.length; i++) {
+                        
+                        const city = jsonbody.data[i].region.cities[0].name
+                        const state = jsonbody.data[i].region.province
+                        const total_confirmed_in_state = jsonbody.data[i].confirmed
+                        const total_death = jsonbody.data[i].deaths
+                        const today_confirmed_in_city = jsonbody.data[i].region.cities[0].confirmed
+                        const death_in_city = jsonbody.data[i].region.cities[0].deaths
+                        const last_update = jsonbody.data[i].region.cities[0].last_update
+                        data.push({
+                            state, city ,total_confirmed_in_state, today_confirmed_in_city, total_death, death_in_city, last_update
+                        })
+                    }
+                    console.log(jsonbody)
                     return res.send(data)
                 }
             });

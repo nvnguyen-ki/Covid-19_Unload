@@ -20,7 +20,6 @@ module.exports = {
     console.log("length: " + titles.length)
     return titles
 }
-  
    
     
 

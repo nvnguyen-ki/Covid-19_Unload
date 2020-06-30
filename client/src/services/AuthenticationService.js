@@ -5,7 +5,11 @@ export default {
     return Api().post('scrape', Text)
   },
   // eslint-disable-next-line camelcase
-  test (region_province, city_name) {
-    return Api().post('test', region_province, city_name)
+  searchData (region_province, city_name) {
+    return Api().post('searchData', region_province, city_name)
+  },
+
+  WorldData () {
+    return Api().post('WorldData')
   }
 }
