@@ -4,6 +4,7 @@
     <div class="scrape_box" >
       <div class="worldData">
         <p id="Worldslate" > {{TotalWorld}} --- {{TotalDeath}}</p>
+        <p id="USAslate" > {{UsaTotal}} --- {{UsaDeath}}</p>
       </div>
       <div id="Infobox">
       <!-- <input type="text" v-model="text" name="text" placeholder="url"/> -->
@@ -25,7 +26,8 @@ export default {
   /* created is a function that runs before the application is loaded.
   and you're calling the function WorldData so it loads the data first */
   created () {
-    console.log('loading...')
+    console.log('getting data...')
+    this.UsaData()
     this.WorldData()
   },
   data () {
@@ -35,17 +37,22 @@ export default {
       text: '',
       error: null,
       TotalWorld: '',
-      TotalDeath: ''
+      TotalDeath: '',
+      UsaTotal: '',
+      UsaDeath: ''
     }
   },
   methods: {
     // World Data of Covid
+    async UsaData () {
+      const res = await AuthenticationService.USAData()
+      this.UsaTotal = 'USA: ' + res.data[0].usaConfirmed
+      this.UsaDeath = 'USA Deaths ' + res.data[0].usaDeaths
+    },
     async WorldData () {
       const res = await AuthenticationService.WorldData()
-      const TotalWorld = res.data[0].total_in_world
-      const TotalDeath = res.data[0].total_death_in_world
-      this.TotalWorld = 'Global: ' + TotalWorld
-      this.TotalDeath = 'Global Deaths ' + TotalDeath
+      this.TotalWorld = 'Global: ' + res.data[0].total_in_world
+      this.TotalDeath = 'Global Deaths ' + res.data[0].total_death_in_world
     },
     // searching covid updates based on state and city in USA.
     async searchData () {

@@ -28,27 +28,50 @@ Based on public data by Johns Hopkins CSSE */
   var totalData = {
     method: 'GET',
     url: 'https://covid-19-statistics.p.rapidapi.com/reports/total',
-    qs: {date: '2020-04-07'},
+    qs: {date: ''},
     headers: {
       'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com',
       'x-rapidapi-key': 'ed695d1127mshcb85b847f3a808fp131680jsn702c0339b102',
       useQueryString: true
     }
   };
-/*          let worldDatas = []
-            request(totalData, function (error, response, body) {
-                if (error) throw new Error(error);
-                const worldData = (JSON.parse(body));
-                const total_in_world = worldData.data.confirmed
-                const total_death_in_world = worldData.data.deaths
-                worldDatas.push({
-                    total_in_world,total_death_in_world
-                })
-            });
-*/
+
+  var USATotal = {
+    method: 'GET',
+    url: 'https://covid-19-data.p.rapidapi.com/country',
+    qs: {format: 'json', name: 'USA'},
+    headers: {
+      'x-rapidapi-host': 'covid-19-data.p.rapidapi.com',
+      'x-rapidapi-key': 'ed695d1127mshcb85b847f3a808fp131680jsn702c0339b102',
+      useQueryString: true
+    }
+  };
 module.exports = (app) => {
+    app.post('/USAData', (req,res) => {
+        let USAData = []
+            request(USATotal, function (error, response, body) {
+                if (error) throw new Error(error);
+                const UsaTotal = (JSON.parse(body));
+                const usaConfirmed = UsaTotal[0].confirmed;
+                const usaDeaths = UsaTotal[0].deaths;
+                // push data to array
+                USAData.push({
+                    usaConfirmed, usaDeaths
+                })
+                console.log(USAData)
+                res.send(USAData)
+            });
+    })
+
 
     app.post('/WorldData', (req,res) => {
+        var today = new Date();
+        var dd = String(today.getDate()-1).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        console.log(today)
+        totalData.qs.date = today
         let worldDatas = []
             request(totalData, function (error, response, body) {
                 if (error) throw new Error(error);

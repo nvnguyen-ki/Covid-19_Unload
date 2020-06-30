@@ -1,4 +1,4 @@
-## Covid-19 webapp
+## Covid-19 Application
 
 ## Motivation
 With some familiarity with UI/UX design wit Vue and back-end programming with Node.js, I wanted to fully combine the two and create a simple website that ...?

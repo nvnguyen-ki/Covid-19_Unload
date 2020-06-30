@@ -11,5 +11,8 @@ export default {
 
   WorldData () {
     return Api().post('WorldData')
+  },
+  USAData () {
+    return Api().post('USAData')
   }
 }
