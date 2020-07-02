@@ -46,6 +46,14 @@ Based on public data by Johns Hopkins CSSE */
       useQueryString: true
     }
   };
+
+  var dailyUpdates = {
+    method: 'GET',
+    url: 'https://covidtracking.com/api/states',
+    headers: {
+      json: true
+    }
+  };
     // getting the date of yesterday
     var today = new Date();    
     // set date of today to yesterday.
@@ -57,6 +65,23 @@ Based on public data by Johns Hopkins CSSE */
     console.log(today)
 
 module.exports = (app) => {
+    // index from 0 to 55 brings latest updates from every state 
+    app.post('/LatestUpdate', (req,res) => {
+        request(dailyUpdates, function (error, response, body) {
+            if (error) throw new Error(error);
+            const dailyUpdates = (JSON.parse(body));
+            var latest = ''
+            var latestState = ''
+            for (let i = 0; i < 56; i++) {
+                if (latest < dailyUpdates[i].lastUpdateEt) {
+                    latest = dailyUpdates[i].lastUpdateEt
+                    latestState = dailyUpdates[i]
+                }
+            }
+            console.log(latestState)
+            res.send(latestState)
+        });
+    })
     // total USA and World Covid Data
     app.post('/WorldData', (req,res) => {
         let USAData = []

@@ -53,7 +53,7 @@ export default {
         const totalConfirmedInState = funct.AbbreviateNum(res.data[0].total_confirmed_in_state)
         const deathInCity = funct.AbbreviateNum(res.data[0].death_in_city)
         const totalDeathInState = funct.AbbreviateNum(res.data[0].total_death)
-        document.getElementById('info').innerHTML = 'confirmed cases: ' + confirmedInCity + ' & deaths today: ' + deathInCity +
+        document.getElementById('info').innerHTML = 'Confirmed cases in City: ' + confirmedInCity + ' <br/>Deaths in city today: ' + deathInCity +
         '<br/>Confirmed in State: ' + totalConfirmedInState + '<br/>Death in State: ' + totalDeathInState
         document.getElementById('error').innerHTML = ''
       } catch (error) {
@@ -78,7 +78,6 @@ export default {
 </script>
 <style scoped>
 .box {
-  width:50;
   text-align: center;
   margin:auto;
 }

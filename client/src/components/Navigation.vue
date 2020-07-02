@@ -1,7 +1,7 @@
 <template>
   <!-- Image and text -->
 <nav class="navbar navbar-light bg-light sticky-top">
-  <a class="navbar-brand" href="/" style="text-decoration: underline;">
+  <a class="navbar-brand" href="/" style="text-decoration:">
     covid-19
   </a>
 </nav>
