@@ -16,7 +16,7 @@ Based on public data by Johns Hopkins CSSE */
       iso: 'USA',
       region_name: 'US',
       city_name: '',
-      date: '2020-06-28',
+      date: '',
     },
     headers: {
       'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com',
@@ -46,7 +46,18 @@ Based on public data by Johns Hopkins CSSE */
       useQueryString: true
     }
   };
+    // getting the date of yesterday
+    var today = new Date();    
+    // set date of today to yesterday.
+    today.setDate(today.getDate()-1)
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+    console.log(today)
+
 module.exports = (app) => {
+    // total USA and World Covid Data
     app.post('/WorldData', (req,res) => {
         let USAData = []
         // request for usa data
@@ -59,14 +70,7 @@ module.exports = (app) => {
                 USAData.push({
                     usaConfirmed, usaDeaths
                 })
-                console.log(USAData)
             });
-        var today = new Date();
-        var dd = String(today.getDate()-1).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        today = yyyy + '-' + mm + '-' + dd;
-        console.log(today)
         totalData.qs.date = today
         let worldDatas = []
         // request for total data
@@ -77,14 +81,13 @@ module.exports = (app) => {
                 const total_death_in_world = worldData.data.deaths
                 const usaConfirmed = USAData[0].usaConfirmed
                 const usaDeaths = USAData[0].usaDeaths
+                const lastUpdate = worldData.data.last_update
                 worldDatas.push({
-                    total_in_world,total_death_in_world, usaConfirmed, usaDeaths
+                    total_in_world,total_death_in_world, usaConfirmed, usaDeaths, lastUpdate
                 })
-                console.log(worldDatas)
                 res.send(worldDatas)
             });
     })
-    
     // request from covid api depending on country
     app.post('/searchData', 
     async function(req, res) { 
@@ -98,7 +101,7 @@ module.exports = (app) => {
         }
             dailyUSAData.qs.region_province = region
             dailyUSAData.qs.city_name = city
-            
+            dailyUSAData.qs.date = today
             await request(dailyUSAData, function (error, response, body) {
                 
                 if (error) throw new Error(error);
