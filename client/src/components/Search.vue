@@ -2,7 +2,7 @@
   <div class="page" style="margin-top:20px;">
     <div class="box" >
       <button v-on:click="isHidden = !isHidden" >Search</button>
-      <div id="inputbox" v-if="isHidden">
+      <div id="inputbox" v-if="isHidden" data-aos="fade-up" >
       <!-- <input type="text" v-model="text" name="text" placeholder="url"/> -->
       <input id="states" type="text" v-model="regionProvince" name="regionProvince" placeholder="State"/>
       <input type="text" v-model="CityName" name="CityName" placeholder="City Name"/>
@@ -29,15 +29,7 @@ export default {
       regionProvince: '',
       text: '',
       error: null,
-      states: ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia',
-        'Federated States of Micronesia', 'Florida', 'Georgia', 'Guam',
-        'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands',
-        'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-        'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-        'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
-        'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota',
-        'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-        'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
+      updated: ''
     }
   },
   methods: {
@@ -49,12 +41,14 @@ export default {
       }))
       try {
         console.log(res.data)
+        console.log(res.data[0].last_update)
+        const updated = funct.dateToHowManyAgo(res.data[0].last_update)
         const confirmedInCity = funct.AbbreviateNum(res.data[0].today_confirmed_in_city)
         const totalConfirmedInState = funct.AbbreviateNum(res.data[0].total_confirmed_in_state)
         const deathInCity = funct.AbbreviateNum(res.data[0].death_in_city)
         const totalDeathInState = funct.AbbreviateNum(res.data[0].total_death)
-        document.getElementById('info').innerHTML = 'Confirmed cases in City: ' + confirmedInCity + ' <br/>Deaths in city today: ' + deathInCity +
-        '<br/>Confirmed in State: ' + totalConfirmedInState + '<br/>Death in State: ' + totalDeathInState
+        document.getElementById('info').innerHTML = updated + '<br/>Total New confirmed cases in city: ' + confirmedInCity + ' <br/>Deaths in city today: ' + deathInCity +
+        '<br/>Total Confirmed in State: ' + totalConfirmedInState + '<br/>Total Death in State: ' + totalDeathInState
         document.getElementById('error').innerHTML = ''
       } catch (error) {
         document.getElementById('info').innerHTML = ''

@@ -7,6 +7,9 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import {sync} from 'vuex-router-sync'
 import store from './store/store'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
@@ -14,9 +17,15 @@ Vue.use(Vuetify)
 sync(store, router)
 /* eslint-disable no-new */
 new Vue({
+  created () {
+    AOS.init()
+  },
   el: '#app',
   router,
+  AOS,
+  PulseLoader,
   store,
   components: { App },
-  template: '<App/>'
-})
+  template: '<App/>',
+  render: h => h(App)
+}).$mount('#app')

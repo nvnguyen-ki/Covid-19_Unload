@@ -8,6 +8,7 @@ export default {
     var scaled = number / scale
     return scaled.toFixed(1) + prefix
   },
+  // 'yyyy-mm-dd 00:00:00' ex: 2019-11-07 19:17:06
   dateToHowManyAgo (stringDate) {
     var currDate = new Date()
     var diffMs = currDate.getTime() - new Date(stringDate).getTime()

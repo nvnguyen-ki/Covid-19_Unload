@@ -1,16 +1,11 @@
 
 <template>
-  <div class="page" style="margin-top:20px;">
-      <div class="worldData">
-        <p id="data" > {{TotalWorld}} </p>
-        <p id="data" > {{TotalDeath}}</p>
-        <p id="data" > {{UsaTotal}} </p>
-        <p id="data" > {{UsaDeath}}</p>
-        <p id="data"> {{lastUpdated}}</p>
+  <div class="page" style="margin-top:20px; text-align: justify;" >
+      <div class="worldData" data-aos="fade-down" >
+        <h5 id="data" > {{lastUpdated}} <br/>  {{TotalWorld}}<br/>  {{TotalDeath}}<br/>  {{UsaTotal}}<br/>  {{UsaDeath}}</h5>
       </div>
-      <div class="dailyUpdates">
-        <p id="newUpdate">{{this.timeSince}}</p>
-        <p id="newUpdate">{{this.latest.text}}</p>
+      <div class="dailyUpdates" data-aos="fade-down">
+        <h5 id="newUpdate" data-aos="fade-right"></h5>
       </div>
   </div>
 </template>
@@ -25,6 +20,8 @@ export default {
     console.log('getting data...')
     this.WorldData()
     this.LatestUpdate()
+    // looping LatestUpdate log display
+    this.interval = setInterval(() => this.LatestUpdate(), 280000)
   },
   data () {
     return {
@@ -48,27 +45,42 @@ export default {
     // World Data of Covid
     async WorldData () {
       const res = await AuthenticationService.WorldData()
+      console.log(res.data[0])
       this.UsaTotal = 'Confirmed cases in USA: ' + funct.AbbreviateNum(res.data[0].usaConfirmed)
       this.UsaDeath = 'USA Deaths: ' + funct.AbbreviateNum(res.data[0].usaDeaths)
       this.TotalWorld = 'Confirmed cases in the world: ' + funct.AbbreviateNum(res.data[0].total_in_world)
       this.TotalDeath = 'Global Deaths: ' + funct.AbbreviateNum(res.data[0].total_death_in_world)
-      this.lastUpdated = 'Updated on: ' + funct.AbbreviateNum(res.data[0].lastUpdate)
+      this.lastUpdated = 'Updated ' + funct.dateToHowManyAgo(res.data[0].lastUpdate) + '.'
     },
     async LatestUpdate () {
       const res = await AuthenticationService.LatestUpdate()
-      this.latest.date = res.data.lastUpdateEt
-      const time = await funct.dateToHowManyAgo(this.latest.date)
-      this.latest.newCases = res.data.positiveIncrease
-      this.latest.state = res.data.state
-      this.timeSince = 'Updated ' + time
-      this.latest.text = this.latest.newCases + ' new cases in ' + this.latest.state
+      // console.log(res.data)
+      var i = 0
+      for (i = 0; i < res.data.length; i++) {
+        this.latest.date = res.data[i].lastUpdateEt
+        const time = await funct.dateToHowManyAgo(this.latest.date)
+        const newCase = res.data[i].positiveIncrease
+        const state = res.data[i].state
+        const timeSince = 'Updated ' + time + '.'
+        const latestText = newCase + ' new cases in ' + state + '.'
+        // length of data is 56. shows data every 5 seconds. resets every 280 seconds.
+        setTimeout(async function () {
+          document.getElementById('newUpdate').innerHTML = timeSince + '<br/>' + latestText
+          // changing opacity to 1 and back to 0 every time innerhtml changes for effect
+          document.getElementById('newUpdate').style.opacity = 1
+          setTimeout(async function () {
+            document.getElementById('newUpdate').style.opacity = 0
+          }, 4000)
+        }, i * 5000)
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-.dailyUpdates {
-  border: 1px solid grey;
+#newUpdate {
+  transition: all 1s;
 }
+
 </style>

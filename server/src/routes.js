@@ -46,7 +46,7 @@ Based on public data by Johns Hopkins CSSE */
       useQueryString: true
     }
   };
-
+  // https://documenter.getpostman.com/view/8854915/SzS8rjHv?version=latest#225b6b2e-7880-460d-903e-d96c8d1e69ea
   var dailyUpdates = {
     method: 'GET',
     url: 'https://covidtracking.com/api/states',
@@ -63,23 +63,13 @@ Based on public data by Johns Hopkins CSSE */
     var yyyy = today.getFullYear();
     today = yyyy + '-' + mm + '-' + dd;
     console.log(today)
-
 module.exports = (app) => {
     // index from 0 to 55 brings latest updates from every state 
     app.post('/LatestUpdate', (req,res) => {
         request(dailyUpdates, function (error, response, body) {
             if (error) throw new Error(error);
             const dailyUpdates = (JSON.parse(body));
-            var latest = ''
-            var latestState = ''
-            for (let i = 0; i < 56; i++) {
-                if (latest < dailyUpdates[i].lastUpdateEt) {
-                    latest = dailyUpdates[i].lastUpdateEt
-                    latestState = dailyUpdates[i]
-                }
-            }
-            console.log(latestState)
-            res.send(latestState)
+            res.send(dailyUpdates)
         });
     })
     // total USA and World Covid Data
@@ -102,6 +92,7 @@ module.exports = (app) => {
             request(totalData, function (error, response, body) {
                 if (error) throw new Error(error);
                 const worldData = (JSON.parse(body));
+                console.log(worldData)
                 const total_in_world = worldData.data.confirmed
                 const total_death_in_world = worldData.data.deaths
                 const usaConfirmed = USAData[0].usaConfirmed
