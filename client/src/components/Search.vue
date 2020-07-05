@@ -1,18 +1,20 @@
 <template>
-  <div class="page" style="margin-top:20px;">
+  <div class="page">
     <div class="box" >
-      <button v-on:click="isHidden = !isHidden" >Search</button>
+      <v-btn  small  v-on:click="isHidden = !isHidden" class="ma-2" outlined color="indigo">Search</v-btn>
       <div id="inputbox" v-if="isHidden" data-aos="fade-up" >
       <!-- <input type="text" v-model="text" name="text" placeholder="url"/> -->
-      <input id="states" type="text" v-model="regionProvince" name="regionProvince" placeholder="State"/>
-      <input type="text" v-model="CityName" name="CityName" placeholder="City Name"/>
-       <!-- <input type="text" name="scrape" placeholder="Email, phone, etc..."/> -->
-      <v-btn text small style="margin: 15px;font-size:12px; border:1px solid rgb(146, 146, 146)" @click="searchData">test</v-btn>
-      <!-- <div id="error" v-html="error" /> -->
-      <p id="info">
-      </p>
-      <p id="error">
-      </p>
+        <input id="states" type="text" v-model="regionProvince" name="regionProvince" placeholder="State"/>
+        <br>
+        <input type="text" v-model="CityName" name="CityName" placeholder="City Name"/>
+        <br>
+        <!-- <input type="text" name="scrape" placeholder="Email, phone, etc..."/> -->
+        <v-btn class="ma-2" outlined color="indigo" text small style="font-size:12px;" @click="searchData">test</v-btn>
+        <!-- <div id="error" v-html="error" /> -->
+        <p id="info">
+        </p>
+        <v-alert id="error" >
+        </v-alert>
       </div>
     </div>
   </div>
@@ -55,24 +57,9 @@ export default {
         document.getElementById('error').innerHTML = res.data.error
       }
     }
-    // async scrape () {
-    //   try {
-    //     const res = await AuthenticationService.scrape(({
-    //       text: this.text
-    //     }))
-    //     for (var i = 0; i < res.data.length; i++) {
-    //       document.getElementById('congrats').innerHTML = res.data[i].title + ' Has a ' + res.data[i].rating + ' rating.'
-    //     }
-    //   } catch (error) {
-    //     this.error = error.response.data.error
-    //   }
-    // }
   }
 }
 </script>
 <style scoped>
-.box {
-  text-align: center;
-  margin:auto;
-}
+
 </style>

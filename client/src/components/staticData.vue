@@ -2,10 +2,11 @@
 <template>
   <div class="page" style="margin-top:20px; text-align: justify;" >
       <div class="worldData" data-aos="fade-down" >
-        <h5 id="data" > {{lastUpdated}} <br/>  {{TotalWorld}}<br/>  {{TotalDeath}}<br/>  {{UsaTotal}}<br/>  {{UsaDeath}}</h5>
+        <h3 style="font-weight: bold;">{{lastUpdated}}</h3>
+        <h5 id="data"> {{TotalWorld}} <br/>  {{TotalDeath}}<br/>  {{UsaTotal}}<br/>  {{UsaDeath}}</h5>
       </div>
       <div class="dailyUpdates" data-aos="fade-down">
-        <h5 id="newUpdate" data-aos="fade-right"></h5>
+        <h5 id="newUpdate" data-aos="fade-down"></h5>
       </div>
   </div>
 </template>
@@ -16,7 +17,7 @@ import funct from '@/services/functions'
 export default {
   /* created is a function that runs before the application is loaded.
   and you're calling the function WorldData so it loads the data first */
-  created () {
+  mounted () {
     console.log('getting data...')
     this.WorldData()
     this.LatestUpdate()
@@ -70,7 +71,7 @@ export default {
           document.getElementById('newUpdate').style.opacity = 1
           setTimeout(async function () {
             document.getElementById('newUpdate').style.opacity = 0
-          }, 4000)
+          }, 3900)
         }, i * 5000)
       }
     }
@@ -79,8 +80,19 @@ export default {
 </script>
 
 <style scoped>
-#newUpdate {
-  transition: all 1s;
+.worldData {
+  position: relative;
+  width:25vw;
 }
-
+.dailyUpdates {
+  position: relative;
+  text-align: center;
+}
+#data {
+  font-size: 25px;
+  border-top: 1px solid rgb(231, 231, 231);
+}
+#newUpdate {
+  font-size: 25px;
+}
 </style>

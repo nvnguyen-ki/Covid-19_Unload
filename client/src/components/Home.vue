@@ -1,7 +1,7 @@
 <template>
   <div class="page" style="margin-top:20px;">
     <static-data id="components"/>
-    <search id="components"/>
+    <search id="search"/>
 
     <p id="demo"></p>
   </div>
@@ -27,10 +27,9 @@ export default {
 </script>
 
 <style scoped>
-
-.box {
-  width:50;
+#search {
+  position: relative;
   text-align: center;
-  margin:auto;
+  margin-top: 35px;
 }
 </style>
