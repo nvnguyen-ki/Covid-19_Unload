@@ -9,6 +9,17 @@ const cheerio = require('cheerio');
 /* COVID-19 Statistics API Documentation
 Based on public data by Johns Hopkins CSSE */
 
+var countriesDaily = {
+    method: 'GET',
+    url: 'https://covid-193.p.rapidapi.com/statistics',
+    headers: {
+      'x-rapidapi-host': 'covid-193.p.rapidapi.com',
+      'x-rapidapi-key': 'ed695d1127mshcb85b847f3a808fp131680jsn702c0339b102',
+      useQueryString: true
+    }
+  };
+  
+
   var dailyUSAData = {
     method: 'GET',
     url: 'https://covid-19-statistics.p.rapidapi.com/reports',
@@ -62,8 +73,17 @@ Based on public data by Johns Hopkins CSSE */
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
     today = yyyy + '-' + mm + '-' + dd;
-    console.log(today)
+
 module.exports = (app) => {
+    app.post('/countriesDaily', (req,res) => {
+    request(countriesDaily, function (error, response, body) {
+    if (error) throw new Error(error);
+    const countries = JSON.parse(body)
+    res.send(countries.response)
+    });
+    })
+
+
     // index from 0 to 55 brings latest updates from every state 
     app.post('/LatestUpdate', (req,res) => {
         request(dailyUpdates, function (error, response, body) {

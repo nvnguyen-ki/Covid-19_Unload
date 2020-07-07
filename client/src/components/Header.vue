@@ -2,7 +2,7 @@
   <!-- Image and text -->
   <div class="header">
   <a class="navbar-brand" href="/" style="text-decoration:">
-      <h2 id="title">CoVID19-UnloaD</h2>
+      <span id="title1">CoVID19</span>-<span id="title2">UnloaD</span>
   </a>
   </div>
 </template>
@@ -14,16 +14,18 @@ export default {
 </script>
 
 <style scoped>
+#title1{
+  color:rgb(82, 155, 60);
+}
+#title2 {
+  color:rgb(134, 183, 224)
+}
 .header {
   background-color:#fafafa;
   padding: 4px;
+  text-align: center;
+  color:black;
+  font-weight: 900;
 }
 
-#title {
-  color: black;
-  background-color: #ffeb3b;
-  text-decoration: underline;
-  font-weight: bold;
-  position: relative;
-}
 </style>

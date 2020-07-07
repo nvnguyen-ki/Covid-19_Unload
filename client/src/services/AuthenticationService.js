@@ -13,5 +13,8 @@ export default {
   },
   LatestUpdate () {
     return Api().post('LatestUpdate')
+  },
+  countriesDaily () {
+    return Api().post('countriesDaily')
   }
 }
