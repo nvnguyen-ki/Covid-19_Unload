@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="box" >
-      <v-btn  small  v-on:click="isHidden = !isHidden" class="ma-2" outlined color="indigo">Search U.S Cities</v-btn>
+        <v-btn  medium  v-on:click="isHidden = !isHidden" class="ma-2" outlined color="indigo">Search U.S Cities</v-btn>
        <transition name="fade">
       <div id="inputbox" v-if="isHidden" >
         <v-form v-model="valid">
@@ -9,6 +9,7 @@
               <v-text-field
             label="State"
             required
+            dense
             v-model="regionProvince"
           ></v-text-field>
            <v-text-field
@@ -18,12 +19,19 @@
           ></v-text-field>
         <v-btn class="ma-2" outlined color="indigo" text small style="font-size:12px;" v-on:click="searchData() ; display()">search</v-btn>
         <!-- <div id="error" v-html="error" /> -->
-        <transition name="fade">
+          <div id="infobox">
+            <transition name="fade">
         <p id="info" v-if="show">
-          {{this.text}}
+          {{this.time}}
+          {{this.cityCase}}
+          {{this.cityDeath}}
+          <br>
+          {{this.stateCase}}
+          {{this.stateDeath}}
           {{this.error}}
         </p>
         </transition>
+          </div>
          </v-container>
         </v-form>
       </div>
@@ -44,7 +52,11 @@ export default {
       text: '',
       error: null,
       updated: '',
-      show: false
+      show: false,
+      cityCase: '',
+      cityDeath: '',
+      stateCase: '',
+      stateDeath: ''
     }
   },
   methods: {
@@ -59,16 +71,19 @@ export default {
       }))
       try {
         this.error = ''
-        console.log(res.data)
-        console.log(res.data[0].last_update)
-        const updated = funct.dateToHowManyAgo(res.data[0].last_update)
         const confirmedInCity = funct.AbbreviateNum(res.data[0].today_confirmed_in_city)
         const totalConfirmedInState = funct.AbbreviateNum(res.data[0].total_confirmed_in_state)
         const deathInCity = funct.AbbreviateNum(res.data[0].death_in_city)
         const totalDeathInState = funct.AbbreviateNum(res.data[0].total_death)
-        this.text = updated + 'Total New confirmed cases in city: ' + confirmedInCity + 'Deaths in city today: ' + deathInCity +
-        'Total Confirmed in State: ' + totalConfirmedInState + 'Total Death in State: ' + totalDeathInState
+        this.cityCase = confirmedInCity + ' new cases with '
+        this.cityDeath = deathInCity + ' deaths today in the city.'
+        this.stateCase = totalConfirmedInState + ' total cases with '
+        this.stateDeath = totalDeathInState + ' deaths within the state.'
       } catch (error) {
+        this.cityCase = ''
+        this.cityDeath = ''
+        this.stateCase = ''
+        this.stateDeath = ''
         this.text = ''
         this.error = res.data.error
       }
@@ -77,6 +92,10 @@ export default {
 }
 </script>
 <style scoped>
+#infobox {
+  margin-top:15px;
+  font-size: 20px;
+}
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity .5s

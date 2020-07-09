@@ -3,7 +3,7 @@
   <div class="page" style="text-align: justify;" >
      <h5 id="lastUpdated"> {{lastUpdated}}</h5>
       <div class="worldData" data-aos="fade-down" >
-        <h3>// Latest World updates</h3>
+        <h3>/01/ <span style="text-decoration:underline;"> Latest World updates </span> </h3>
         <div class="CountryUpdates" data-aos="fade-down">
         <h5 id="newCountryUpdates" data-aos="fade-down"></h5>
         </div>
@@ -11,7 +11,7 @@
         <h5 id="data"> <span id="numbers">{{TotalDeath}} </span> <span id="sub"> <br> total deaths around the World </span></h5>
       </div>
       <div class="usaData" data-aos="fade-down" >
-        <h3>// Latest U.S updates </h3>
+        <h3>/02/ <span style="text-decoration:underline;">Latest U.S updates</span> </h3>
         <div class="dailyUpdates" data-aos="fade-down">
         <h5 id="newUpdate" data-aos="fade-down"></h5>
       </div>
@@ -144,8 +144,8 @@ export default {
 }
 #data {
   font-size: 20px;
-  padding: 20px;
-  background-color: #f5f9fc;
+  padding: 15px;
+  background-color: #ebf4fc;
 }
 #newUpdate {
   font-size: 20px;

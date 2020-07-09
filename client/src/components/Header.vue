@@ -1,7 +1,8 @@
 <template>
   <!-- Image and text -->
   <div class="header">
-      <h5><a href="/">CoVID19 UnloaD</a></h5>
+    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
+      <h5><a href="/">CoVID19 UnloaD <i class="em em-mask" aria-role="presentation" aria-label="FACE WITH MEDICAL MASK"></i></a></h5>
   </div>
 </template>
 
