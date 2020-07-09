@@ -1,21 +1,33 @@
 <template>
   <div class="page">
     <div class="box" >
-      <v-btn  small  v-on:click="isHidden = !isHidden" class="ma-2" outlined color="indigo">Search</v-btn>
-      <div id="inputbox" v-if="isHidden" data-aos="fade-up" >
-      <!-- <input type="text" v-model="text" name="text" placeholder="url"/> -->
-        <input id="states" type="text" v-model="regionProvince" name="regionProvince" placeholder="State"/>
-        <br>
-        <input type="text" v-model="CityName" name="CityName" placeholder="City Name"/>
-        <br>
-        <!-- <input type="text" name="scrape" placeholder="Email, phone, etc..."/> -->
-        <v-btn class="ma-2" outlined color="indigo" text small style="font-size:12px;" @click="searchData">test</v-btn>
+      <v-btn  small  v-on:click="isHidden = !isHidden" class="ma-2" outlined color="indigo">Search U.S Cities</v-btn>
+       <transition name="fade">
+      <div id="inputbox" v-if="isHidden" >
+        <v-form v-model="valid">
+           <v-container>
+              <v-text-field
+            label="State"
+            required
+            v-model="regionProvince"
+          ></v-text-field>
+           <v-text-field
+            label="City Name"
+            required
+            v-model="CityName"
+          ></v-text-field>
+        <v-btn class="ma-2" outlined color="indigo" text small style="font-size:12px;" v-on:click="searchData() ; display()">search</v-btn>
         <!-- <div id="error" v-html="error" /> -->
-        <p id="info">
+        <transition name="fade">
+        <p id="info" v-if="show">
+          {{this.text}}
+          {{this.error}}
         </p>
-        <v-alert id="error" >
-        </v-alert>
+        </transition>
+         </v-container>
+        </v-form>
       </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -31,10 +43,14 @@ export default {
       regionProvince: '',
       text: '',
       error: null,
-      updated: ''
+      updated: '',
+      show: false
     }
   },
   methods: {
+    async display () {
+      this.show = !this.show
+    },
     async searchData () {
       const res = await AuthenticationService.searchData(({
         // getting data from input
@@ -42,6 +58,7 @@ export default {
         city_name: this.CityName
       }))
       try {
+        this.error = ''
         console.log(res.data)
         console.log(res.data[0].last_update)
         const updated = funct.dateToHowManyAgo(res.data[0].last_update)
@@ -49,17 +66,31 @@ export default {
         const totalConfirmedInState = funct.AbbreviateNum(res.data[0].total_confirmed_in_state)
         const deathInCity = funct.AbbreviateNum(res.data[0].death_in_city)
         const totalDeathInState = funct.AbbreviateNum(res.data[0].total_death)
-        document.getElementById('info').innerHTML = updated + '<br/>Total New confirmed cases in city: ' + confirmedInCity + ' <br/>Deaths in city today: ' + deathInCity +
-        '<br/>Total Confirmed in State: ' + totalConfirmedInState + '<br/>Total Death in State: ' + totalDeathInState
-        document.getElementById('error').innerHTML = ''
+        this.text = updated + 'Total New confirmed cases in city: ' + confirmedInCity + 'Deaths in city today: ' + deathInCity +
+        'Total Confirmed in State: ' + totalConfirmedInState + 'Total Death in State: ' + totalDeathInState
       } catch (error) {
-        document.getElementById('info').innerHTML = ''
-        document.getElementById('error').innerHTML = res.data.error
+        this.text = ''
+        this.error = res.data.error
       }
     }
   }
 }
 </script>
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s
+}
 
+.fade-enter,
+.fade-leave-to {
+    opacity: 0
+}
+::-webkit-scrollbar {
+  display: none;
+}
+#info{
+}
+#error{
+}
 </style>

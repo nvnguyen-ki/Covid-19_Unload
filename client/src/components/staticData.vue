@@ -1,38 +1,23 @@
 
 <template>
-  <div class="page" style="margin-top:20px; text-align: justify;" >
-     <div id="lastUpdated">{{lastUpdated}}</div>
-    <v-card
-    class="mx-auto"
-    max-width="396"
-  >
-  <v-card-title class="headline">World Update</v-card-title>
+  <div class="page" style="text-align: justify;" >
+     <h5 id="lastUpdated"> {{lastUpdated}}</h5>
       <div class="worldData" data-aos="fade-down" >
-         <v-card-subtitle>
-        <h5 id="data"> {{TotalWorld}}</h5>
-        <h5 id="data"> {{TotalDeath}} </h5>
+        <h3>// Latest World updates</h3>
         <div class="CountryUpdates" data-aos="fade-down">
         <h5 id="newCountryUpdates" data-aos="fade-down"></h5>
         </div>
-
-         </v-card-subtitle>
+        <h5 id="data"> <span id="numbers">{{TotalWorld}} </span> <span id="sub"> <br> total cases around the World </span></h5>
+        <h5 id="data"> <span id="numbers">{{TotalDeath}} </span> <span id="sub"> <br> total deaths around the World </span></h5>
       </div>
-       </v-card>
-       <v-card
-    class="mx-auto"
-    max-width="396"
-  >
-      <v-card-title class="headline">USA updates</v-card-title>
       <div class="usaData" data-aos="fade-down" >
-      <v-card-subtitle>
-      <h5 id="data">{{UsaTotal}} </h5>
-      <h5 id="data"> {{UsaDeath}}</h5>
-      <div class="dailyUpdates" data-aos="fade-down">
+        <h3>// Latest U.S updates </h3>
+        <div class="dailyUpdates" data-aos="fade-down">
         <h5 id="newUpdate" data-aos="fade-down"></h5>
       </div>
-      </v-card-subtitle>
+      <h5 id="data"> <span id="numbers">{{UsaTotal}} </span> <span id="sub"> <br> total cases in U.S </span></h5>
+      <h5 id="data"> <span id="numbers">{{UsaDeath}} </span> <span id="sub"> <br> total deaths in U.S </span> </h5>
       </div>
-       </v-card>
   </div>
 </template>
 
@@ -74,11 +59,11 @@ export default {
     async WorldData () {
       const res = await AuthenticationService.WorldData()
       console.log(res.data[0])
-      this.UsaTotal = 'Confirmed cases in USA: ' + funct.AbbreviateNum(res.data[0].usaConfirmed)
-      this.UsaDeath = 'USA Deaths: ' + funct.AbbreviateNum(res.data[0].usaDeaths)
-      this.TotalWorld = 'Confirmed cases in the world: ' + funct.AbbreviateNum(res.data[0].total_in_world)
-      this.TotalDeath = 'Global Deaths: ' + funct.AbbreviateNum(res.data[0].total_death_in_world)
-      this.lastUpdated = 'Updated ' + funct.dateToHowManyAgo(res.data[0].lastUpdate) + '.'
+      this.UsaTotal = funct.AbbreviateNum(res.data[0].usaConfirmed)
+      this.UsaDeath = funct.AbbreviateNum(res.data[0].usaDeaths)
+      this.TotalWorld = funct.AbbreviateNum(res.data[0].total_in_world)
+      this.TotalDeath = funct.AbbreviateNum(res.data[0].total_death_in_world)
+      this.lastUpdated = funct.dateToHowManyAgo(res.data[0].lastUpdate)
     },
     async LatestUpdate () {
       const res = await AuthenticationService.LatestUpdate()
@@ -124,13 +109,30 @@ export default {
 </script>
 
 <style scoped>
-#lastUpdated {
+#sub {
+  font-size: 15px;
+  position: relative;
   text-align: center;
-  font-weight: 900;
-  font-size: 25px;
+}
+#numbers {
+  background-color:yellow;
+}
+#lastUpdated {
+  font-family: 'Montserrat Subrayada', sans-serif;
+  position: relative;
+  left:100px;
 }
 .worldData {
   position: relative;
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+.usaData {
+  position: relative;
+  width: 50%;
+  margin: auto;
+  text-align: center;
 }
 .dailyUpdates {
   position: relative;
@@ -142,6 +144,8 @@ export default {
 }
 #data {
   font-size: 20px;
+  padding: 20px;
+  background-color: #f5f9fc;
 }
 #newUpdate {
   font-size: 20px;

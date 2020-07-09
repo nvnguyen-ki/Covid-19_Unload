@@ -1,9 +1,7 @@
 <template>
   <!-- Image and text -->
   <div class="header">
-  <a class="navbar-brand" href="/" style="text-decoration:">
-      <span id="title1">CoVID19</span>-<span id="title2">UnloaD</span>
-  </a>
+      <h5><a href="/">CoVID19 UnloaD</a></h5>
   </div>
 </template>
 
@@ -14,18 +12,20 @@ export default {
 </script>
 
 <style scoped>
-#title1{
-  color:rgb(82, 155, 60);
+a {
+  color:black;
+  font-family: 'Montserrat Subrayada', sans-serif;
 }
-#title2 {
-  color:rgb(134, 183, 224)
+a:hover {
+  color:black;
+  background-color:yellow;
+  text-decoration: none;
 }
 .header {
-  background-color:#fafafa;
-  padding: 4px;
-  text-align: center;
+  margin-top: 50px;
+  margin-left: 100px;
   color:black;
-  font-weight: 900;
+  font-weight: 400;
 }
 
 </style>
