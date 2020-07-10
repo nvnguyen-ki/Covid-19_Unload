@@ -18,10 +18,12 @@ export default {
 </script>
 
 <style scoped>
+::-webkit-scrollbar {
+  display: none;
+}
 #app {
   font-family: 'Inconsolata', monospace;
   scroll-behavior: smooth;
-  overflow: hidden;
   height: 100vh;
 }
 </style>
