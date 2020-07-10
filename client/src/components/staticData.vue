@@ -3,7 +3,7 @@
   <div class="page" style="text-align: justify;" >
      <h5 id="lastUpdated"> {{lastUpdated}}</h5>
       <div class="worldData" data-aos="fade-down" >
-        <h3>/01/ <span style="text-decoration:underline;"> Latest World updates </span> </h3>
+        <h3>/01/ <span style=""> Latest World updates <i class="em em-earth_americas" aria-role="presentation" aria-label="EARTH GLOBE AMERICAS"></i></span> </h3>
         <div class="CountryUpdates" data-aos="fade-down">
         <h5 id="newCountryUpdates" data-aos="fade-down"></h5>
         </div>
@@ -11,7 +11,7 @@
         <h5 id="data"> <span id="numbers">{{TotalDeath}} </span> <span id="sub"> <br> total deaths around the World </span></h5>
       </div>
       <div class="usaData" data-aos="fade-down" >
-        <h3>/02/ <span style="text-decoration:underline;">Latest U.S updates</span> </h3>
+        <h3>/02/ <span style="">Latest U.S updates <i class="em em-flag-um" aria-role="presentation" aria-label="U.S. Outlying Islands Flag"></i></span> </h3>
         <div class="dailyUpdates" data-aos="fade-down">
         <h5 id="newUpdate" data-aos="fade-down"></h5>
       </div>
@@ -28,7 +28,6 @@ export default {
   /* created is a function that runs before the application is loaded.
   and you're calling the function WorldData so it loads the data first */
   mounted () {
-    console.log('getting data...')
     this.WorldData()
     this.LatestUpdate()
     this.countriesDaily()
@@ -58,7 +57,6 @@ export default {
     // World Data of Covid
     async WorldData () {
       const res = await AuthenticationService.WorldData()
-      console.log(res.data[0])
       this.UsaTotal = funct.AbbreviateNum(res.data[0].usaConfirmed)
       this.UsaDeath = funct.AbbreviateNum(res.data[0].usaDeaths)
       this.TotalWorld = funct.AbbreviateNum(res.data[0].total_in_world)

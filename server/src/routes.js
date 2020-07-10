@@ -1,10 +1,10 @@
 
-const functions = require('./functions')
+// const functions = require('./functions')
 //const getUrls = require('get-urls')
 
 /* request apis */
 const request = require('request-promise')
-const cheerio = require('cheerio');
+// const cheerio = require('cheerio');
 
 /* COVID-19 Statistics API Documentation
 Based on public data by Johns Hopkins CSSE */
@@ -112,7 +112,7 @@ module.exports = (app) => {
             request(totalData, function (error, response, body) {
                 if (error) throw new Error(error);
                 const worldData = (JSON.parse(body));
-                console.log(worldData)
+                //console.log(worldData)
                 const total_in_world = worldData.data.confirmed
                 const total_death_in_world = worldData.data.deaths
                 const usaConfirmed = USAData[0].usaConfirmed
@@ -161,7 +161,7 @@ module.exports = (app) => {
                             state, city ,total_confirmed_in_state, today_confirmed_in_city, total_death, death_in_city, last_update
                         })
                     }
-                    console.log(jsonbody)
+                    //console.log(jsonbody)
                     return res.send(data)
                 }
             });
@@ -173,54 +173,54 @@ module.exports = (app) => {
     })
     
     // scraping title and ratings of all movies within an array.
-    app.post('/scrape', 
-    async function(req, res) {
-        try {
-            const body = req.body
-            // await will make sure function is ran before going linearly down.
-            const titles = await functions.getTitles(body.text)
-            const text = body.text
-            console.log("this is working: " + text)
-            //const urls = Array.from(getUrls(text));
+    // app.post('/scrape', 
+    // async function(req, res) {
+    //     try {
+    //         const body = req.body
+    //         // await will make sure function is ran before going linearly down.
+    //         const titles = await functions.getTitles(body.text)
+    //         const text = body.text
+    //         console.log("this is working: " + text)
+    //         //const urls = Array.from(getUrls(text));
             
-            if (!body || text === "" || titles.length == 0) { //no text provided.
-                return res.send({
-                    error: "please provide valid urls"
-                })
-            } else {
-            (async function () {
-                let imdbData = []
-                for (let movie of titles) {
-                const response = await request({
-                uri: movie,
-                json: true
-                })
-                let $ = cheerio.load(response)
-                const title = $('div[class="title_wrapper"] > h1').text().trim()
-                var rating = $('div[class="ratingValue"] > strong').text()
-                if (rating === "") {
-                    rating = "unrated"
-                }
-                imdbData.push({
-                title, rating
-                })
-            }
-                res.send(imdbData)
-                console.log(imdbData)
-                return {
-                    title: imdbData.title,
-                    rating: imdbData.rating
-                }
-            }
-            )()
-        }
-    }
-        catch (err) {
-            res.status(500).send({
-            error: 'An error has occured trying to parse'
-        })
-    }
-      });
+    //         if (!body || text === "" || titles.length == 0) { //no text provided.
+    //             return res.send({
+    //                 error: "please provide valid urls"
+    //             })
+    //         } else {
+    //         (async function () {
+    //             let imdbData = []
+    //             for (let movie of titles) {
+    //             const response = await request({
+    //             uri: movie,
+    //             json: true
+    //             })
+    //             let $ = cheerio.load(response)
+    //             const title = $('div[class="title_wrapper"] > h1').text().trim()
+    //             var rating = $('div[class="ratingValue"] > strong').text()
+    //             if (rating === "") {
+    //                 rating = "unrated"
+    //             }
+    //             imdbData.push({
+    //             title, rating
+    //             })
+    //         }
+    //             res.send(imdbData)
+    //             console.log(imdbData)
+    //             return {
+    //                 title: imdbData.title,
+    //                 rating: imdbData.rating
+    //             }
+    //         }
+    //         )()
+    //     }
+    // }
+    //     catch (err) {
+    //         res.status(500).send({
+    //         error: 'An error has occured trying to parse'
+    //     })
+    // }
+    //   });
 
 
 }

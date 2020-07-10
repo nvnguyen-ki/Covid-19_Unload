@@ -4,7 +4,6 @@
         <v-btn  medium  v-on:click="isHidden = !isHidden" class="ma-2" outlined color="indigo">Search U.S Cities</v-btn>
        <transition name="fade">
       <div id="inputbox" v-if="isHidden" >
-        <v-form v-model="valid">
            <v-container>
               <v-text-field
             label="State"
@@ -33,7 +32,6 @@
         </transition>
           </div>
          </v-container>
-        </v-form>
       </div>
       </transition>
     </div>
