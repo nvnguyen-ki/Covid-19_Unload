@@ -12,4 +12,8 @@ With some familiarity with UI/UX design wit Vue and back-end programming with No
 - CSS
 - JS
 ```
+## issues
+ ``` bash
+2 node modules within each file (client and server)
 
+```
