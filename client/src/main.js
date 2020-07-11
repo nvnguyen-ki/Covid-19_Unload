@@ -5,8 +5,8 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import {sync} from 'vuex-router-sync'
-import store from './store/store'
+// import {sync} from 'vuex-router-sync'
+// import store from './store/store'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
@@ -14,7 +14,7 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 Vue.config.productionTip = false
 Vue.use(Vuetify)
 
-sync(store, router)
+// sync(store, router)
 /* eslint-disable no-new */
 new Vue({
   created () {
@@ -24,7 +24,7 @@ new Vue({
   router,
   AOS,
   PulseLoader,
-  store,
+  // store,
   components: { App },
   template: '<App/>',
   render: h => h(App)

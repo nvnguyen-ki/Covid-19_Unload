@@ -13,7 +13,15 @@ app.use(morgan('combine'))
 app.use(bodyParser.json())
 app.use(cors())
 require('./routes')(app);
+// handle production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(__dirname, '../public'))
 
+    // single page app
+    app.get(/.*/, (req, res) => {
+        res.sendFile(__dirname, '../public/index.html')
+    })
+}
 console.log('running on ' + config.port)
 app.listen(config.port)
 
