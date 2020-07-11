@@ -1,11 +1,10 @@
 const path = require('path')
 
 module.exports = {
-    outputDir: path.resolve(__dirname, '../server/public'),
     devServer: {
         proxy: {
             '/': {
-                target: 'http://localhost:8081'
+                target: 'https://covid-19-unload.herokuapp.com/'
             }
         }
     }

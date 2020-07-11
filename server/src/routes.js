@@ -75,6 +75,11 @@ var countriesDaily = {
     today = yyyy + '-' + mm + '-' + dd;
 
 module.exports = (app) => {
+  app.get('/', (req, res) => {
+    res.json({
+      message: 'full stack message board! 🎉'
+    });
+  });
     app.post('/countriesDaily', (req,res) => {
     request(countriesDaily, function (error, response, body) {
     if (error) throw new Error(error);
