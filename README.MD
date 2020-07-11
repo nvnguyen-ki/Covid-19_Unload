@@ -1,5 +1,6 @@
 ## Covid-19 Application
-
+Since heroku is hosting back-end server: if the server is not in use within a 30 minute time span, it will go to sleep. 
+Once you go on the site, you'll have to wait a bit and reload for the server to wake up which will than load the covid-19 statistics.
 ## Motivation
 With some familiarity with UI/UX design wit Vue and back-end programming with Node.js, I wanted to fully combine the two and create a simple website that shows covid update.
 
