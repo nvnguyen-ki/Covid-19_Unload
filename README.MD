@@ -12,8 +12,22 @@ With some familiarity with UI/UX design wit Vue and back-end programming with No
 - CSS
 - JS
 ```
+## deployment
+ ``` bash
+deploying server folder (back-end) on Heroku
+deploying client folder (front-end) on vercel now cli
+[Server]
+1. commit and git push heroku master
+[client]
+1. npm run serve (local test)
+2. npm run build (create dist folder in client)
+3. cd dist
+4. now (in command line)
+
+```
+
 ## issues
  ``` bash
-2 node modules within each file (client and server)
+a lot of vunerabilities exposed because of un-needed modules.
 
 ```
