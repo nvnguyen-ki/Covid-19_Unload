@@ -106,8 +106,9 @@ export default {
 ::-webkit-scrollbar {
   display: none;
 }
-#info{
-}
-#error{
+.page {
+  position: relative;
+  margin-top:200px;
+  text-align: center;
 }
 </style>

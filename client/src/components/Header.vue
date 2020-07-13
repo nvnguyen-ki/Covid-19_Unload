@@ -2,6 +2,7 @@
   <!-- Image and text -->
   <div class="header">
       <h5><a href="/">CoVID19 UnloaD <i class="em em-mask" aria-role="presentation" aria-label="FACE WITH MEDICAL MASK"></i></a></h5>
+      <h5><router-link to="/search">Search U.S.A <i class="em em-mag_right" aria-role="presentation" aria-label="RIGHT-POINTING MAGNIFYING GLASS"></i></router-link></h5>
   </div>
 </template>
 

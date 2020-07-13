@@ -5,7 +5,7 @@
       <div class="worldData" data-aos="fade-down" >
         <h3>/01/ <span style=""> Latest World updates <i class="em em-earth_americas" aria-role="presentation" aria-label="EARTH GLOBE AMERICAS"></i></span> </h3>
         <div class="CountryUpdates" data-aos="fade-down">
-        <h5 id="newCountryUpdates" data-aos="fade-down"></h5>
+        <span id="newCountryUpdates" data-aos="fade-down"> </span>
         </div>
         <h5 id="data"> <span id="numbers">{{TotalWorld}} </span> <span id="sub"> <br> total cases around the World </span></h5>
         <h5 id="data"> <span id="numbers">{{TotalDeath}} </span> <span id="sub"> <br> total deaths around the World </span></h5>
@@ -13,7 +13,7 @@
       <div class="usaData" data-aos="fade-down" >
         <h3>/02/ <span style="">Latest U.S updates <i class="em em-flag-um" aria-role="presentation" aria-label="U.S. Outlying Islands Flag"></i></span> </h3>
         <div class="dailyUpdates" data-aos="fade-down">
-        <h5 id="newUpdate" data-aos="fade-down"></h5>
+        <span id="newUpdate" data-aos="fade-down"> </span>
       </div>
       <h5 id="data"> <span id="numbers">{{UsaTotal}} </span> <span id="sub"> <br> total cases in U.S </span></h5>
       <h5 id="data"> <span id="numbers">{{UsaDeath}} </span> <span id="sub"> <br> total deaths in U.S </span> </h5>
@@ -113,12 +113,15 @@ export default {
   text-align: center;
 }
 #numbers {
-  background-color:yellow;
+  background-color:rgb(213, 247, 241);
+  font-size: 23px;
 }
 #lastUpdated {
   font-family: 'Montserrat Subrayada', sans-serif;
   position: relative;
-  left:100px;
+  float: right;
+  right:150px;
+  bottom: 70px;
 }
 .worldData {
   position: relative;
@@ -140,12 +143,16 @@ export default {
   position: relative;
   text-align: center;
 }
+#newCountryUpdates {
+  font-size: 20px;
+  border-bottom: 1px solid black;
+}
 #data {
   font-size: 20px;
   padding: 15px;
-  background-color: #ebf4fc;
 }
 #newUpdate {
   font-size: 20px;
+  border-bottom: 1px solid black;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="app" >
-    <Header />
+    <Header/>
     <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada&display=swap" rel="stylesheet">
@@ -10,9 +10,11 @@
 </template>
 
 <script>
+import Header from './components/Header.vue'
 export default {
   name: 'App',
   components: {
+    Header
   }
 }
 </script>
@@ -24,6 +26,5 @@ export default {
 #app {
   font-family: 'Inconsolata', monospace;
   scroll-behavior: smooth;
-  height: 100vh;
 }
 </style>
