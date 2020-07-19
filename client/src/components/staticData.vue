@@ -122,6 +122,17 @@ export default {
   float: right;
   right:150px;
   bottom: 70px;
+
+}
+@media screen and (max-width: 1250px) {
+#lastUpdated {
+  font-family: 'Montserrat Subrayada', sans-serif;
+  position: relative;
+  left: 100px;
+  float: left;
+  bottom: 15px;
+}
+
 }
 .worldData {
   position: relative;
