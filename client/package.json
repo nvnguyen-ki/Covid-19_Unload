@@ -11,7 +11,9 @@
   "dependencies": {
     "aos": "^3.0.0-beta.6",
     "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
     "vue": "^2.5.2",
+    "vue-chartjs": "^3.5.0",
     "vue-router": "^3.0.1",
     "vue-spinner": "^1.0.3",
     "vuetify": "^2.3.1",
