@@ -24,5 +24,8 @@ export default {
     if (m < 12) { return parseInt(m) + ' month' + (parseInt(m) > 1 ? 's' : '') + ' ago' }
     var y = m / 12
     return parseInt(y) + ' year' + (parseInt(y) > 1 ? 's' : '') + ' ago'
-  }
+  },
+  numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 }

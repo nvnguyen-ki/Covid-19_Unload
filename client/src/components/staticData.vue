@@ -1,7 +1,7 @@
 
 <template>
   <div class="page" style="text-align: justify;" >
-     <h5 id="lastUpdated"> Updated : {{lastUpdated}}</h5>
+     <h5 id="lastUpdated"> Last Updated : {{lastUpdated}}</h5>
      <v-card
     class="mx-auto"
     max-width="800"
@@ -33,6 +33,7 @@
       <!-- <div class="small">
         <line-chart :chart-data="datacollection"></line-chart>
       </div> -->
+      <footerinfo/>
   </div>
 </template>
 
@@ -40,6 +41,7 @@
 import AuthenticationService from '@/services/AuthenticationService'
 import funct from '@/services/functions'
 import LineChart from '../services/LineChart.js'
+import footerinfo from './FooterInfo.vue'
 export default {
   /* created is a function that runs before the application is loaded.
   and you're calling the function WorldData so it loads the data first */
@@ -53,7 +55,8 @@ export default {
     this.interval = setInterval(() => this.countriesDaily(), 1080000)
   },
   components: {
-      LineChart
+      LineChart,
+      footerinfo
   },
   data () {
     return {
@@ -90,10 +93,10 @@ export default {
     },
     async WorldData () {
       const res = await AuthenticationService.WorldData()
-      this.UsaTotal = funct.AbbreviateNum(res.data[0].usaConfirmed)
-      this.UsaDeath = funct.AbbreviateNum(res.data[0].usaDeaths)
-      this.TotalWorld = funct.AbbreviateNum(res.data[0].total_in_world)
-      this.TotalDeath = funct.AbbreviateNum(res.data[0].total_death_in_world)
+      this.UsaTotal = funct.numberWithCommas(res.data[0].usaConfirmed)
+      this.UsaDeath = funct.numberWithCommas(res.data[0].usaDeaths)
+      this.TotalWorld = funct.numberWithCommas(res.data[0].total_in_world)
+      this.TotalDeath = funct.numberWithCommas(res.data[0].total_death_in_world)
       this.lastUpdated = funct.dateToHowManyAgo(res.data[0].lastUpdate)
     },
     async LatestUpdate () {
