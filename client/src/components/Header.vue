@@ -8,7 +8,7 @@
             href="https://github.com/nvnguyen-ki/Covid-19_Unload"
             target="_blank"
           >
-              github
+              github (for data source)
               <img src="../assets/github_2.webp" width="28" alt="Github" />
           </a>
         </div>

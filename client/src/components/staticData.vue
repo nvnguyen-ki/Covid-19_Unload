@@ -1,16 +1,27 @@
 
 <template>
   <div class="page" style="text-align: justify;" >
-     <h5 id="lastUpdated"> {{lastUpdated}}</h5>
+     <h5 id="lastUpdated"> Updated : {{lastUpdated}}</h5>
+     <v-card
+    class="mx-auto"
+    max-width="800"
+  >
       <div class="worldData" data-aos="fade-down" >
         <h3>/01/ <span style=""> Latest World updates <i class="em em-earth_americas" aria-role="presentation" aria-label="EARTH GLOBE AMERICAS"></i></span> </h3>
+        
         <div class="CountryUpdates" data-aos="fade-down">
         <span id="newCountryUpdates" data-aos="fade-down"> </span>
         </div>
         <h5 id="data"> <span id="numbers">{{TotalWorld}} </span> <span id="sub"> <br> total cases around the World </span></h5>
         <h5 id="data"> <span id="numbers">{{TotalDeath}} </span> <span id="sub"> <br> total deaths around the World </span></h5>
       </div>
+      </v-card>
+      <v-card
+    class="mx-auto"
+    max-width="800"
+  >
       <div class="usaData" data-aos="fade-down" >
+        
         <h3>/02/ <span style="">Latest U.S updates <i class="em em-flag-um" aria-role="presentation" aria-label="U.S. Outlying Islands Flag"></i></span> </h3>
         <div class="dailyUpdates" data-aos="fade-down">
         <span id="newUpdate" data-aos="fade-down"> </span>
@@ -18,12 +29,17 @@
       <h5 id="data"> <span id="numbers">{{UsaTotal}} </span> <span id="sub"> <br> total cases in U.S </span></h5>
       <h5 id="data"> <span id="numbers">{{UsaDeath}} </span> <span id="sub"> <br> total deaths in U.S </span> </h5>
       </div>
+      </v-card>
+      <!-- <div class="small">
+        <line-chart :chart-data="datacollection"></line-chart>
+      </div> -->
   </div>
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 import funct from '@/services/functions'
+import LineChart from '../services/LineChart.js'
 export default {
   /* created is a function that runs before the application is loaded.
   and you're calling the function WorldData so it loads the data first */
@@ -31,12 +47,17 @@ export default {
     this.WorldData()
     this.LatestUpdate()
     this.countriesDaily()
+     this.fillData()
     // looping LatestUpdate log display
     this.interval = setInterval(() => this.LatestUpdate(), 280000)
     this.interval = setInterval(() => this.countriesDaily(), 1080000)
   },
+  components: {
+      LineChart
+  },
   data () {
     return {
+      datacollection: null,
       error: null,
       TotalWorld: '',
       TotalDeath: '',
@@ -55,6 +76,18 @@ export default {
   methods: {
     // abbreviateNumbers for easier look at numbers.
     // World Data of Covid
+    fillData () {
+        this.datacollection = {
+          labels: [0, this.TotalWorld],
+          datasets: [
+            {
+              label: 'Data One',
+              backgroundColor: 'rgb(213, 247, 241)',
+              data: [0, this.TotalWorld]
+            }
+          ]
+        }
+    },
     async WorldData () {
       const res = await AuthenticationService.WorldData()
       this.UsaTotal = funct.AbbreviateNum(res.data[0].usaConfirmed)
@@ -112,10 +145,7 @@ export default {
   position: relative;
   text-align: center;
 }
-#numbers {
-  background-color:rgb(213, 247, 241);
-  font-size: 23px;
-}
+
 #lastUpdated {
   font-family: 'Montserrat Subrayada', sans-serif;
   position: relative;
@@ -123,6 +153,12 @@ export default {
   right:150px;
   bottom: 70px;
 
+}
+.small {
+    width: 45%;
+    position: relative;
+    margin:auto;
+    border: 1px solid black;
 }
 @media screen and (max-width: 1250px) {
 #lastUpdated {
@@ -132,7 +168,6 @@ export default {
   float: left;
   bottom: 15px;
 }
-
 }
 .worldData {
   position: relative;

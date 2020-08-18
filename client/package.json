@@ -29,7 +29,8 @@
     "webpack": "^4.1.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.1.0",
+    "elliptic": ">=6.5.3"
   },
   "engines": {
     "node": ">= 6.0.0",

@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 app.use(cors())
 require('./routes')(app);
 // heroku : name must be "PORT"
-const PORT = process.env.PORT || 8081;
+const PORT = 8081 || process.env.PORT ;
 app.listen(PORT, () => {
     console.log(`listening on ${PORT}`);
   });
