@@ -35,11 +35,9 @@ a lot of vunerabilities exposed because of un-needed modules.
 ```
 
 ## credits
- ``` bash
 [https://covidtracking.com/data](https://covidtracking.com/data)
 [https://rapidapi.com/axisbits-axisbits-default/api/covid-19-statistics?endpoint=apiendpoint_191c58c7-a995-4024-a5ee-41043d79e542](https://rapidapi.com/axisbits-axisbits-default/api/covid-19-statistics?endpoint=apiendpoint_191c58c7-a995-4024-a5ee-41043d79e542)
 [https://coronavirus.jhu.edu/us-map](https://coronavirus.jhu.edu/us-map)
 [https://github.com/afeld/emoji-css/](https://github.com/afeld/emoji-css/)
 [https://github.com/michalsnik/aos](https://github.com/michalsnik/aos )
-```
 
