@@ -7,7 +7,7 @@
     max-width="800"
   >
       <div class="worldData" data-aos="fade-down" >
-        <h3>/01/ <span style=""> Latest World updates <i class="em em-earth_americas" aria-role="presentation" aria-label="EARTH GLOBE AMERICAS"></i></span> </h3>
+        <h3> <span style=""> Latest World updates <i class="em em-earth_americas" aria-role="presentation" aria-label="EARTH GLOBE AMERICAS"></i></span> </h3>
         
         <div class="CountryUpdates" data-aos="fade-down">
         <span id="newCountryUpdates" data-aos="fade-down"> </span>
@@ -22,7 +22,7 @@
   >
       <div class="usaData" data-aos="fade-down" >
         
-        <h3>/02/ <span style="">Latest U.S updates <i class="em em-flag-um" aria-role="presentation" aria-label="U.S. Outlying Islands Flag"></i></span> </h3>
+        <h3><span style="">Latest U.S updates <i class="em em-flag-um" aria-role="presentation" aria-label="U.S. Outlying Islands Flag"></i></span> </h3>
         <div class="dailyUpdates" data-aos="fade-down">
         <span id="newUpdate" data-aos="fade-down"> </span>
       </div>
@@ -143,6 +143,9 @@ export default {
 </script>
 
 <style scoped>
+#numbers {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 #sub {
   font-size: 15px;
   position: relative;
@@ -155,6 +158,7 @@ export default {
   float: right;
   right:150px;
   bottom: 70px;
+  font-size: 15px;
 
 }
 .small {
