@@ -23,7 +23,8 @@ deploying client folder (front-end) on vercel now cli
 1. npm run serve (local test)
 2. npm run build (create dist folder in client)
 3. cd dist
-4. now (in command line)
+4. now login
+5. now (in command line)
 
 ```
 
@@ -34,11 +35,13 @@ a lot of vunerabilities exposed because of un-needed modules.
 ```
 
 ## credits
- ``` bash
-https://covidtracking.com/data
-https://rapidapi.com/axisbits-axisbits-default/api/covid-19-statistics?endpoint=apiendpoint_191c58c7-a995-4024-a5ee-41043d79e542
-https://coronavirus.jhu.edu/us-map
-https://github.com/afeld/emoji-css/
-https://github.com/michalsnik/aos
-```
+[https://covidtracking.com/data](https://covidtracking.com/data)
+
+[https://rapidapi.com/axisbits-axisbits-default/api/covid-19-statistics?endpoint=apiendpoint_191c58c7-a995-4024-a5ee-41043d79e542](https://rapidapi.com/axisbits-axisbits-default/api/covid-19-statistics?endpoint=apiendpoint_191c58c7-a995-4024-a5ee-41043d79e542)
+
+[https://coronavirus.jhu.edu/us-map](https://coronavirus.jhu.edu/us-map)
+
+[https://github.com/afeld/emoji-css/](https://github.com/afeld/emoji-css/)
+
+[https://github.com/michalsnik/aos](https://github.com/michalsnik/aos )
 
