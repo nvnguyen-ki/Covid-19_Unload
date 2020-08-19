@@ -12,8 +12,8 @@
         <div class="CountryUpdates" data-aos="fade-down">
         <span id="newCountryUpdates" data-aos="fade-down"> </span>
         </div>
-        <h5 id="data"> <span id="numbers">{{TotalWorld}} </span> <span id="sub"> <br> total cases around the World </span></h5>
-        <h5 id="data"> <span id="numbers">{{TotalDeath}} </span> <span id="sub"> <br> total deaths around the World </span></h5>
+        <h5 id="data"> <span id="numbers" style="color:rgb(26, 170, 127)">{{TotalWorld}} </span> <span id="sub"> <br> total cases around the World </span></h5>
+        <h5 id="data"> <span id="numbers" style="color:rgb(240, 179, 67)">{{TotalDeath}} </span> <span id="sub"> <br> total deaths around the World </span></h5>
       </div>
       </v-card>
       <v-card
@@ -26,8 +26,8 @@
         <div class="dailyUpdates" data-aos="fade-down">
         <span id="newUpdate" data-aos="fade-down"> </span>
       </div>
-      <h5 id="data"> <span id="numbers">{{UsaTotal}} </span> <span id="sub"> <br> total cases in U.S </span></h5>
-      <h5 id="data"> <span id="numbers">{{UsaDeath}} </span> <span id="sub"> <br> total deaths in U.S </span> </h5>
+      <h5 id="data"> <span id="numbers" style="color:rgb(100, 136, 202)">{{UsaTotal}} </span> <span id="sub"> <br> total cases in U.S </span></h5>
+      <h5 id="data"> <span id="numbers" style="color: rgb(219, 118, 118)">{{UsaDeath}} </span> <span id="sub"> <br> total deaths in U.S </span> </h5>
       </div>
       </v-card>
       <!-- <div class="small">
@@ -145,6 +145,7 @@ export default {
 <style scoped>
 #numbers {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
 }
 #sub {
   font-size: 15px;
@@ -165,7 +166,7 @@ export default {
     width: 45%;
     position: relative;
     margin:auto;
-    border: 1px solid black;
+    border: 1px solid rgb(0, 0, 0);
 }
 @media screen and (max-width: 1250px) {
 #lastUpdated {
