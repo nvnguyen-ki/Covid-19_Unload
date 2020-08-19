@@ -23,7 +23,8 @@ deploying client folder (front-end) on vercel now cli
 1. npm run serve (local test)
 2. npm run build (create dist folder in client)
 3. cd dist
-4. now (in command line)
+4. now login
+5. now (in command line)
 
 ```
 
