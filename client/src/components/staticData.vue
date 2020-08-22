@@ -24,7 +24,7 @@
   >
       <div class="usaData" data-aos="fade-down" >
         
-        <h3><span style="">Latest U.S updates <i class="em em-flag-um" aria-role="presentation" aria-label="U.S. Outlying Islands Flag"></i></span> </h3>
+        <h3><span style="">Latest U.S.A updates <i class="em em-flag-um" aria-role="presentation" aria-label="U.S. Outlying Islands Flag"></i></span> </h3>
       <h5 id="data"> <span id="numbers" style="color:rgb(100, 136, 202)">{{UsaTotal}} </span> <span id="sub"> <br> total cases in U.S </span></h5>
       <h5 id="data"> <span id="numbers" style="color: rgb(219, 118, 118)">{{UsaDeath}} </span> <span id="sub"> <br> total deaths in U.S </span> </h5>
       </div>
@@ -110,7 +110,7 @@ export default {
       this.UsaDeath = funct.numberWithCommas(res.data[0].usaDeaths)
       this.TotalWorld = funct.numberWithCommas(res.data[0].total_in_world)
       this.TotalDeath = funct.numberWithCommas(res.data[0].total_death_in_world)
-      this.lastUpdated = funct.dateToHowManyAgo(res.data[0].lastUpdate)
+      this.lastUpdated = (res.data[0].lastUpdate)
     },
     async LatestUpdate () {
       const res = await AuthenticationService.LatestUpdate()
@@ -170,8 +170,8 @@ export default {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   position: relative;
   float: right;
-  right:350px;
-  bottom: 115px;
+  right:150px;
+  bottom: 112px;
   font-size: 15px;
 
 }
@@ -203,6 +203,7 @@ export default {
   width: 50%;
   margin: auto;
   text-align: center;
+  margin-top:50px;
 }
 .dailyUpdates {
   position: relative;
