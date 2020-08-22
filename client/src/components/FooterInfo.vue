@@ -2,7 +2,7 @@
   <!-- Image and text -->
   <div class="footer">
     <h6 id="warning">
-      <span style="color:red">Warning:</span> Hosted free on heroku, therefore, website will be down every time it is unused and will take a while to load.
+      <span style="color:red">Warning:</span> Server hosted free on heroku, therefore, website's data will be down every time it is unused and will take a while to load.
     </h6>
   </div>
 </template>

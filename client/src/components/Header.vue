@@ -1,17 +1,17 @@
 <template>
   <!-- Image and text -->
   <div class="header">
-      <h5><a href="/">CoVID19 UnloaD <i class="em em-mask" aria-role="presentation" aria-label="FACE WITH MEDICAL MASK"></i></a></h5>
+      <h5><a href="/">Covid-19 Unload <i class="em em-mask" aria-role="presentation" aria-label="FACE WITH MEDICAL MASK"></i></a></h5>
       <h5><router-link to="/search">Search U.S.A <i class="em em-mag_right" aria-role="presentation" aria-label="RIGHT-POINTING MAGNIFYING GLASS"></i></router-link></h5>
-       <div class="github-b">
+       <h5 class="github-b">
           <a
             href="https://github.com/nvnguyen-ki/Covid-19_Unload"
             target="_blank"
           >
-              github (for data source)
+              github
               <img src="../assets/github_2.webp" width="28" alt="Github" />
           </a>
-        </div>
+        </h5>
   </div>
 </template>
 
@@ -22,9 +22,12 @@ export default {
 </script>
 
 <style scoped>
+.github-b {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 a {
   color:black;
-  font-family: 'Montserrat Subrayada', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 a:hover {
   color:black;

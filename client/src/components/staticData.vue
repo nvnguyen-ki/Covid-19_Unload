@@ -154,11 +154,11 @@ export default {
 }
 
 #lastUpdated {
-  font-family: 'Montserrat Subrayada', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   position: relative;
   float: right;
-  right:150px;
-  bottom: 70px;
+  right:300px;
+  bottom: 140px;
   font-size: 15px;
 
 }
@@ -174,7 +174,7 @@ export default {
   position: relative;
   left: 100px;
   float: left;
-  bottom: 15px;
+  bottom: 37px;
 }
 }
 .worldData {
@@ -182,6 +182,7 @@ export default {
   width: 50%;
   margin: auto;
   text-align: center;
+  margin-top:50px;
 }
 .usaData {
   position: relative;
