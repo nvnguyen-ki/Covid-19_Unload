@@ -2,34 +2,47 @@
 <template>
   <div class="page" style="text-align: justify;" >
      <h5 id="lastUpdated"> Last Updated : {{lastUpdated}}</h5>
+     <v-container fluid>
+       <v-row>
      <v-card
     class="mx-auto"
-    max-width="800"
+     width="300"
+    height="440"
   >
       <div class="worldData" data-aos="fade-down" >
         <h3> <span style=""> Latest World updates <i class="em em-earth_americas" aria-role="presentation" aria-label="EARTH GLOBE AMERICAS"></i></span> </h3>
         
-        <div class="CountryUpdates" data-aos="fade-down">
-        <span id="newCountryUpdates" data-aos="fade-down"> </span>
-        </div>
+        
         <h5 id="data"> <span id="numbers" style="color:rgb(26, 170, 127)">{{TotalWorld}} </span> <span id="sub"> <br> total cases around the World </span></h5>
         <h5 id="data"> <span id="numbers" style="color:rgb(240, 179, 67)">{{TotalDeath}} </span> <span id="sub"> <br> total deaths around the World </span></h5>
       </div>
       </v-card>
       <v-card
     class="mx-auto"
-    max-width="800"
+     width="300"
+    height="440"
   >
       <div class="usaData" data-aos="fade-down" >
         
         <h3><span style="">Latest U.S updates <i class="em em-flag-um" aria-role="presentation" aria-label="U.S. Outlying Islands Flag"></i></span> </h3>
-        <div class="dailyUpdates" data-aos="fade-down">
-        <span id="newUpdate" data-aos="fade-down"> </span>
-      </div>
       <h5 id="data"> <span id="numbers" style="color:rgb(100, 136, 202)">{{UsaTotal}} </span> <span id="sub"> <br> total cases in U.S </span></h5>
       <h5 id="data"> <span id="numbers" style="color: rgb(219, 118, 118)">{{UsaDeath}} </span> <span id="sub"> <br> total deaths in U.S </span> </h5>
       </div>
       </v-card>
+      <v-card
+    class="mx-auto"
+    width="300"
+    height="180"
+  >
+      <div class="CountryUpdates" data-aos="fade-down">
+        <span id="newCountryUpdates" data-aos="fade-down"> </span>
+        </div>
+        <div class="dailyUpdates" data-aos="fade-down">
+        <span id="newUpdate" data-aos="fade-down"> </span>
+      </div>
+      </v-card>
+      </v-row>
+     </v-container>
       <!-- <div class="small">
         <line-chart :chart-data="datacollection"></line-chart>
       </div> -->
@@ -157,8 +170,8 @@ export default {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   position: relative;
   float: right;
-  right:300px;
-  bottom: 140px;
+  right:350px;
+  bottom: 115px;
   font-size: 15px;
 
 }
@@ -170,11 +183,12 @@ export default {
 }
 @media screen and (max-width: 1250px) {
 #lastUpdated {
-  font-family: 'Montserrat Subrayada', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   position: relative;
-  left: 100px;
-  float: left;
-  bottom: 37px;
+  float: right;
+  right:260px;
+  bottom: 115px;
+  font-size: 15px;
 }
 }
 .worldData {
