@@ -11,8 +11,6 @@
   >
       <div class="worldData" data-aos="fade-down" >
         <h3> <span style=""> Latest World updates <i class="em em-earth_americas" aria-role="presentation" aria-label="EARTH GLOBE AMERICAS"></i></span> </h3>
-        
-        
         <h5 id="data"> <span id="numbers" style="color:rgb(26, 170, 127)">{{TotalWorld}} </span> <span id="sub"> <br> total cases around the World </span></h5>
         <h5 id="data"> <span id="numbers" style="color:rgb(240, 179, 67)">{{TotalDeath}} </span> <span id="sub"> <br> total deaths around the World </span></h5>
       </div>
@@ -32,13 +30,18 @@
       <v-card
     class="mx-auto"
     width="300"
-    height="180"
+    height="440"
   >
-      <div class="CountryUpdates" data-aos="fade-down">
+  
+      <div class="CountryUpdates" data-aos="fade-down" style="margin-top:50px;"> 
+        <h3>recent updates </h3>
+        <h3 style="margin-bottom:54px"><i class="em em-mantelpiece_clock" aria-role="presentation" aria-label=""></i></h3>
         <span id="newCountryUpdates" data-aos="fade-down"> </span>
+        <span id="sub" > <br> World </span>
         </div>
-        <div class="dailyUpdates" data-aos="fade-down">
+        <div class="dailyUpdates" style="margin-top:55px" data-aos="fade-down">
         <span id="newUpdate" data-aos="fade-down"> </span>
+        <span id="sub"> <br> U.S.A </span>
       </div>
       </v-card>
       </v-row>
@@ -158,7 +161,7 @@ export default {
 <style scoped>
 #numbers {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  
+  font-size:28px;
 }
 #sub {
   font-size: 15px;
@@ -215,7 +218,6 @@ export default {
 }
 #newCountryUpdates {
   font-size: 20px;
-  border-bottom: 1px solid black;
 }
 #data {
   font-size: 20px;
@@ -223,6 +225,5 @@ export default {
 }
 #newUpdate {
   font-size: 20px;
-  border-bottom: 1px solid black;
 }
 </style>
