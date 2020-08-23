@@ -34,13 +34,13 @@
   >
   
       <div class="CountryUpdates" data-aos="fade-down" style="margin-top:50px;"> 
-        <h3>recent updates </h3>
-        <h3 style="margin-bottom:54px"><i class="em em-mantelpiece_clock" aria-role="presentation" aria-label=""></i></h3>
-        <span id="newCountryUpdates" data-aos="fade-down"> </span>
-        <span id="sub" > <br> World </span>
+        <h3>recent <br> updates </h3>
+        <h3 style="margin-bottom:20px"><i class="em em-mantelpiece_clock" aria-role="presentation" aria-label=""></i></h3>
+        <span id="newCountryUpdates" data-aos="fade-down" style="color:rgb(163, 79, 138)"> </span>
+        <span id="sub"  > <br> World </span>
         </div>
-        <div class="dailyUpdates" style="margin-top:55px" data-aos="fade-down">
-        <span id="newUpdate" data-aos="fade-down"> </span>
+        <div class="dailyUpdates" style="margin-top:65px" data-aos="fade-down">
+        <span id="newUpdate" data-aos="fade-down" style="color:rgb(163, 79, 138)"> </span>
         <span id="sub"> <br> U.S.A </span>
       </div>
       </v-card>
@@ -161,7 +161,7 @@ export default {
 <style scoped>
 #numbers {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size:28px;
+  font-size:24px;
 }
 #sub {
   font-size: 15px;
