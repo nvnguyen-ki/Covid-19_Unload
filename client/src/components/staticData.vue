@@ -39,7 +39,7 @@
         <span id="newCountryUpdates" data-aos="fade-down" style="color:rgb(163, 79, 138)"> </span>
         <span id="sub"  > <br> World </span>
         </div>
-        <div class="dailyUpdates" style="margin-top:65px" data-aos="fade-down">
+        <div class="dailyUpdates" style="margin-top:45px" data-aos="fade-down">
         <span id="newUpdate" data-aos="fade-down" style="color:rgb(163, 79, 138)"> </span>
         <span id="sub"> <br> U.S.A </span>
       </div>
