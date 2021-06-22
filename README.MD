@@ -1,10 +1,12 @@
 ## Covid-19 Application
+Simple full stack application to get a better understanding of deploying a full stack application.
+Collected covid-19 data from [rapid api](https://rapidapi.com/axisbits-axisbits-default/api/covid-19-statistics?endpoint=apiendpoint_191c58c7-a995-4024-a5ee-41043d79e542) and [covidtracking](https://covidtracking.com/data).
+
+
 Since heroku is hosting back-end server: if the server is not in use within a 30 minute time span, it will go to sleep. 
 Once you go on the site, you'll have to wait a bit and reload for the server to wake up which will than load the covid-19 statistics.
-## Motivation
-With some familiarity of Vue and Node.js, I wanted to fully combine the two and create a simple website that shows covid update.
 
-## Tech/framework used
+## Tech stack used
  ``` bash
 - Vuetify
 - Bootstrap
@@ -14,7 +16,7 @@ With some familiarity of Vue and Node.js, I wanted to fully combine the two and 
 - CSS
 - JS
 ```
-## deployment
+## Deployment
  ``` bash
 deploying server folder (back-end) on Heroku
 deploying client folder (front-end) on vercel now cli
@@ -29,20 +31,9 @@ deploying client folder (front-end) on vercel now cli
 
 ```
 
-## issues
- ``` bash
-a lot of vunerabilities exposed because of un-needed modules.
+## Others
 
-```
+Used some cool [emojis](https://github.com/afeld/emoji-css/)
 
-## credits
-[https://covidtracking.com/data](https://covidtracking.com/data)
-
-[https://rapidapi.com/axisbits-axisbits-default/api/covid-19-statistics?endpoint=apiendpoint_191c58c7-a995-4024-a5ee-41043d79e542](https://rapidapi.com/axisbits-axisbits-default/api/covid-19-statistics?endpoint=apiendpoint_191c58c7-a995-4024-a5ee-41043d79e542)
-
-[https://coronavirus.jhu.edu/us-map](https://coronavirus.jhu.edu/us-map)
-
-[https://github.com/afeld/emoji-css/](https://github.com/afeld/emoji-css/)
-
-[https://github.com/michalsnik/aos](https://github.com/michalsnik/aos )
+Use some cool [slide effects](https://github.com/michalsnik/aos )
 
