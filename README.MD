@@ -1,5 +1,5 @@
 ## Covid-19 Application
-Simple full stack application to get a better understanding of deploying a full stack application.
+Simple web application to get a better understanding of deploying a full stack application.
 Collected covid-19 data from [rapid api](https://rapidapi.com/axisbits-axisbits-default/api/covid-19-statistics?endpoint=apiendpoint_191c58c7-a995-4024-a5ee-41043d79e542) and [covidtracking](https://covidtracking.com/data).
 
 
