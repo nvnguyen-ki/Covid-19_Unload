@@ -1,20 +1,18 @@
 import Api from '@/services/Api'
 
 export default {
-  scrape (Text) {
-    return Api().post('scrape', Text)
-  },
+  
   // eslint-disable-next-line camelcase
   searchData (region_province, city_name) {
-    return Api().post('searchData', region_province, city_name)
+    return Api().get('searchData', region_province, city_name)
   },
   WorldData () {
-    return Api().post('WorldData')
+    return Api().get('WorldData')
   },
   LatestUpdate () {
-    return Api().post('LatestUpdate')
+    return Api().get('LatestUpdate')
   },
   countriesDaily () {
-    return Api().post('countriesDaily')
+    return Api().get('countriesDaily')
   }
 }

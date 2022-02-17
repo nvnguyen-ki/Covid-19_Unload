@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "-": "0.0.1",
+    "axios": "^0.26.0",
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "cli-table": "^0.3.1",

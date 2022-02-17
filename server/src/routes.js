@@ -4,46 +4,40 @@
 
 /* request apis */
 const request = require('request-promise')
+const axios = require('axios').default;
 // const cheerio = require('cheerio');
 
 /* COVID-19 Statistics API Documentation
 Based on public data by Johns Hopkins CSSE */
 
-var countriesDaily = {
-    method: 'GET',
-    url: 'https://covid-193.p.rapidapi.com/statistics',
-    headers: {
-      'x-rapidapi-host': 'covid-193.p.rapidapi.com',
-      'x-rapidapi-key': 'ed695d1127mshcb85b847f3a808fp131680jsn702c0339b102',
-      useQueryString: true
-    }
-  };
-  
 
-  var dailyUSAData = {
+  var countriesDaily = {
     method: 'GET',
     url: 'https://covid-19-statistics.p.rapidapi.com/reports',
-    qs: {
-      iso: 'USA',
-      region_name: 'US',
-      city_name: '',
-      date: '',
-    },
     headers: {
       'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com',
-      'x-rapidapi-key': 'ed695d1127mshcb85b847f3a808fp131680jsn702c0339b102',
-      useQueryString: true
+      'x-rapidapi-key': 'ed695d1127mshcb85b847f3a808fp131680jsn702c0339b102'
     }
   };
 
   var totalData = {
     method: 'GET',
     url: 'https://covid-19-statistics.p.rapidapi.com/reports/total',
-    qs: {date: ''},
+    params: {date: '2020-04-07'},
+    headers: {
+      'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com',
+      'x-rapidapi-key': 'ed695d1127mshcb85b847f3a808fp131680jsn702c0339b102'
+    }
+  };
+  
+
+  var dailyUSAData = {
+    method: 'GET',
+    url: 'https://covid-19-statistics.p.rapidapi.com/provinces',
+    params: {iso: 'USA'},
     headers: {
       'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com',
       'x-rapidapi-key': 'ed695d1127mshcb85b847f3a808fp131680jsn702c0339b102',
-      useQueryString: true
     }
   };
 
@@ -58,13 +52,9 @@ var countriesDaily = {
     }
   };
   // https://documenter.getpostman.com/view/8854915/SzS8rjHv?version=latest#225b6b2e-7880-460d-903e-d96c8d1e69ea
-  var dailyUpdates = {
-    method: 'GET',
-    url: 'https://covidtracking.com/api/states',
-    headers: {
-      json: true
-    }
-  };
+  
+  
+ 
     // getting the date of yesterday
     var today = new Date();    
     // set date of today to yesterday.
@@ -75,35 +65,36 @@ var countriesDaily = {
     today = yyyy + '-' + mm + '-' + dd;
 
 module.exports = (app) => {
-  app.get('/', (req, res) => {
+  app.get('/',cors(corsOptions), (req, res) => {
     res.json({
-      message: 'full stack message board! 🎉'
+      message: 'covid server start up! 🎉'
     });
   });
-    app.post('/countriesDaily', (req,res) => {
-    request(countriesDaily, function (error, response, body) {
-    if (error) throw new Error(error);
-    const countries = JSON.parse(body)
-    res.send(countries.response)
+
+  app.get('/countriesDaily', (req,res) => {
+    axios.request(countriesDaily).then(function (response) {
+      res.send(response.data);
+    }).catch(function (error) {
+      res.send(error);
     });
     })
 
-
     // index from 0 to 55 brings latest updates from every state 
-    app.post('/LatestUpdate', (req,res) => {
-        request(dailyUpdates, function (error, response, body) {
-            if (error) throw new Error(error);
-            const dailyUpdates = (JSON.parse(body));
-            res.send(dailyUpdates)
-        });
-    })
+    app.get('/LatestUpdate', (req,res) => {
+      axios.request(dailyUSAData).then(function (response) {
+        res.send(response.data);
+      }).catch(function (error) {
+        res.send(error);
+      });
+      })
+    
     // total USA and World Covid Data
-    app.post('/WorldData', (req,res) => {
+    app.get('/WorldData', (req,res) => {
         let USAData = []
         // request for usa data
-            request(USATotal, function (error, response, body) {
+        axios.request(USATotal).then(function (error, response) {
                 if (error) throw new Error(error);
-                const UsaTotal = (JSON.parse(body));
+                const UsaTotal = response.data
                 const usaConfirmed = UsaTotal[0].confirmed;
                 const usaDeaths = UsaTotal[0].deaths;
                 // push data to array
@@ -111,12 +102,12 @@ module.exports = (app) => {
                     usaConfirmed, usaDeaths
                 })
             });
-        totalData.qs.date = today
+        
         let worldDatas = []
         // request for total data
-            request(totalData, function (error, response, body) {
+        axios.request(totalData).then(function (error, response) {
                 if (error) throw new Error(error);
-                const worldData = (JSON.parse(body));
+                const worldData = response.data
                 //console.log(worldData)
                 const total_in_world = worldData.data.confirmed
                 const total_death_in_world = worldData.data.deaths
@@ -143,7 +134,7 @@ module.exports = (app) => {
             dailyUSAData.qs.region_province = region
             dailyUSAData.qs.city_name = city
             dailyUSAData.qs.date = today
-            await request(dailyUSAData, function (error, response, body) {
+            await axios.request(dailyUSAData, function (error, response, body) {
                 
                 if (error) throw new Error(error);
                 let jsonbody = JSON.parse(body)
